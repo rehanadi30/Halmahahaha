@@ -4,16 +4,17 @@ from konstanta import *
 class Board():
     def __init__(self):
         self.board = []
+        self.BSize = SIZE
         self.bidakTerpilih = None
 
     def render(self, win):
         win.fill(GREY)
-        for baris in range(SIZE):
-            for kolom in range(baris%2, SIZE, 2):
+        for baris in range(self.BSize):
+            for kolom in range(baris%2, self.BSize, 2):
                 pygame.draw.rect(win, WHITE, (baris*SQUARE_SIZE, kolom*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
         #Buat border daerah goal
-        if(SIZE==16):
+        if(self.BSize==16):
             #Daerah BOT
             pygame.draw.line(win, RED, (0, 225), (90, 225), 8)
             pygame.draw.line(win, RED, (90, 225), (90, 180), 8)
@@ -35,7 +36,7 @@ class Board():
             pygame.draw.line(win, RED, (630, 540), (630, 495), 8)
             pygame.draw.line(win, RED, (630, 495), (720, 495), 8)
 
-        elif(SIZE==10):
+        elif(self.BSize==10):
             # Daerah BOT
             pygame.draw.line(win, RED, (0, 360), (72, 360), 8)
             pygame.draw.line(win, RED, (72, 360), (72, 288), 8)
@@ -60,5 +61,23 @@ class Board():
             pygame.draw.line(win, RED, (648, 432), (648, 360), 8)
             pygame.draw.line(win, RED, (648, 360), (720, 360), 8)
 
-        elif(SIZE==8):
-            pass
+        elif(self.BSize==8):
+            # Daerah BOT
+            pygame.draw.line(win, RED, (0, 360), (90, 360), 8)
+            pygame.draw.line(win, RED, (90, 360), (90, 270), 8)
+            pygame.draw.line(win, RED, (90, 270), (180, 270), 8)
+            pygame.draw.line(win, RED, (180, 270), (180, 180), 8)
+            pygame.draw.line(win, RED, (180, 180), (270, 180), 8)
+            pygame.draw.line(win, RED, (270, 180), (270, 90), 8)
+            pygame.draw.line(win, RED, (270, 90), (360, 90), 8)
+            pygame.draw.line(win, RED, (360, 90), (360, 0), 8)
+
+            # Daerah User
+            pygame.draw.line(win, RED, (360, 720), (360, 630), 8)
+            pygame.draw.line(win, RED, (360, 630), (450, 630), 8)
+            pygame.draw.line(win, RED, (450, 630), (450, 540), 8)
+            pygame.draw.line(win, RED, (450, 540), (540, 540), 8)
+            pygame.draw.line(win, RED, (540, 540), (540, 450), 8)
+            pygame.draw.line(win, RED, (540, 450), (630, 450), 8)
+            pygame.draw.line(win, RED, (630, 450), (630, 360), 8)
+            pygame.draw.line(win, RED, (630, 360), (720, 360), 8)
