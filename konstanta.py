@@ -1,6 +1,6 @@
 #Size papan
 WIDTH, HEIGHT = 720, 720
-SIZE = 5
+SIZE = 16
 SQUARE_SIZE = WIDTH//SIZE
 
 #Warna
