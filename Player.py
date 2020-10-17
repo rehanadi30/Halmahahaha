@@ -1,55 +1,53 @@
+from pion import *
+
+
 class Player:
-    def __init__(self, sizePapan, color):
+    def __init__(self, sizePapan, color, status):
         self.size = sizePapan  # ukuran papan
         self.color = color  # warna pemain
+        self.status = status  # 1 for BOT, 2 for player
 
         # list of pion yang dimiliki player jika ukuran papan 8
-        pionRed8 = {
-            "1": (0, 0), "2": (0, 1), "3": (0, 2), "4": (0, 3), "5": (1, 0),
-            "6": (1, 1), "7": (1, 2), "8": (2, 0), "9": (2, 1), "10": (3, 0)
-        }
-        pionGreen8 = {
-            "1": (7, 7), "2": (7, 6), "3": (7, 5), "4": (7, 4), "5": (6, 7),
-            "6": (6, 6), "7": (6, 5), "8": (5, 7), "9": (5, 6), "10": (4, 7)
-        }
+        pionRed8 = [
+            Pion(0, 0, self.color, self.status), Pion(0, 1, self.color, self.status), Pion(0, 2, self.color, self.status), Pion(0, 3, self.color, self.status), Pion(1, 0, self.color, self.status),
+            Pion(1, 1, self.color, self.status), Pion(1, 2, self.color, self.status), Pion(2, 0, self.color, self.status), Pion(2, 1, self.color, self.status), Pion(3, 0, self.color, self.status)
+        ]
+        pionGreen8 = [
+            Pion(7, 7, self.color, self.status), Pion(7, 6, self.color, self.status), Pion(7, 5, self.color, self.status), Pion(7, 4, self.color, self.status), Pion(6, 7, self.color, self.status),
+            Pion(6, 6, self.color, self.status), Pion(6, 5, self.color, self.status), Pion(5, 7, self.color, self.status), Pion(5, 6, self.color, self.status), Pion(4, 7, self.color, self.status)
+        ]
 
         # list of pion yang dimiliki player jika ukuran papan 10
-        pionRed10 = {
-            "1": (0, 0), "2": (0, 1), "3": (0, 2), "4": (0, 3), "5": (0, 4), "6": (1, 0), "7": (1, 1),
-            "8": (1, 2), "9": (1, 3), "10": (2, 0), "11": (2, 1), "12": (2, 2), "13": (3, 0), "14": (3, 1), "15": (4, 0)
-        }
-        pionGreen10 = {
-            "1": (9, 9), "2": (9, 8), "3": (9, 7), "4": (9, 6), "5": (9, 5), "6": (8, 9), "7": (8, 8),
-            "8": (8, 7), "9": (8, 6), "10": (7, 9), "11": (7, 8), "12": (7, 7), "13": (6, 9), "14": (6, 8), "15": (5, 9)
-        }
+        pionRed10 = [
+            Pion(0, 0, self.color, self.status), Pion(0, 1, self.color, self.status), Pion(0, 2, self.color, self.status), Pion(0, 3, self.color, self.status), Pion(0, 4, self.color, self.status), Pion(1, 0, self.color, self.status), Pion(1, 1, self.color, self.status),
+            Pion(1, 2, self.color, self.status), Pion(1, 3, self.color, self.status), Pion(2, 0, self.color, self.status), Pion(2, 1, self.color, self.status), Pion(2, 2, self.color, self.status), Pion(3, 0, self.color, self.status), Pion(3, 1, self.color, self.status), Pion(4, 0, self.color, self.status)
+        ]
+        pionGreen10 = [
+            Pion(9, 9, self.color, self.status), Pion(9, 8, self.color, self.status), Pion(9, 7, self.color, self.status), Pion(9, 6, self.color, self.status), Pion(9, 5, self.color, self.status), Pion(8, 9, self.color, self.status), Pion(8, 8, self.color, self.status),
+            Pion(8, 7, self.color, self.status), Pion(8, 6, self.color, self.status), Pion(7, 9, self.color, self.status), Pion(7, 8, self.color, self.status), Pion(7, 7, self.color, self.status), Pion(6, 9, self.color, self.status), Pion(6, 8, self.color, self.status), Pion(5, 9, self.color, self.status)
+        ]
 
         # list of pion yang dimiliki player jika ukuran papan 16
-        pionRed16 = {
-            "1": (0, 0), "2": (0, 1), "3": (0, 2), "4": (0, 3), "5": (0, 4), "6": (1, 0), "7": (1, 1), "8": (1, 2), "9": (1, 3), "10": (1, 4),
-            "11": (2, 0), "12": (2, 1), "13": (2, 2), "14": (2, 3), "15": (3, 0), "16": (3, 1), "17": (3, 2), "18": (4, 0), "19": (4, 1)
-        }
-        pionGreen16 = {
-            "1": (15, 15), "2": (15, 14), "3": (15, 13), "4": (15, 12), "5": (15, 11), "6": (14, 15), "7": (14, 14), "8": (14, 13), "9": (14, 12), "10": (14, 11),
-            "11": (13, 15), "12": (13, 14), "13": (13, 13), "14": (13, 12), "15": (12, 15), "16": (12, 14), "17": (12, 13), "18": (11, 15), "11": (11, 14)
-        }
+        pionRed16 = [
+            Pion(0, 0, self.color, self.status), Pion(0, 1, self.color, self.status), Pion(0, 2, self.color, self.status), Pion(0, 3, self.color, self.status), Pion(0, 4, self.color, self.status), Pion(1, 0, self.color, self.status), Pion(1, 1, self.color, self.status), Pion(1, 2, self.color, self.status), Pion(1, 3, self.color, self.status), Pion(1, 4, self.color, self.status),
+            Pion(2, 0, self.color, self.status), Pion(2, 1, self.color, self.status), Pion(2, 2, self.color, self.status), Pion(2, 3, self.color, self.status), Pion(3, 0, self.color, self.status), Pion(3, 1, self.color, self.status), Pion(3, 2, self.color, self.status), Pion(4, 0, self.color, self.status), Pion(4, 1, self.color, self.status)
+        ]
+        pionGreen16 = [
+            Pion(15, 15, self.color, self.status), Pion(15, 14, self.color, self.status), Pion(15, 13, self.color, self.status), Pion(15, 12, self.color, self.status), Pion(15, 11, self.color, self.status), Pion(14, 15, self.color, self.status), Pion(14, 14, self.color, self.status), Pion(14, 13, self.color, self.status), Pion(14, 12, self.color, self.status), Pion(14, 11, self.color, self.status),
+            Pion(13, 15, self.color, self.status), Pion(13, 14, self.color, self.status), Pion(13, 13, self.color, self.status), Pion(13, 12, self.color, self.status), Pion(12, 15, self.color, self.status), Pion(12, 14, self.color, self.status), Pion(12, 13, self.color, self.status), Pion(11, 15, self.color, self.status), Pion(11, 14, self.color, self.status)
+        ]
 
         # list of posisi goal yang harus dituju untuk size papan 8
-        goalRed8 = [(7, 7), (7, 6), (7, 5), (7, 4), (6, 7),
-                    (6, 6), (6, 5), (5, 7), (5, 6), (4, 7)]
-        goalGreen8 = [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0),
-                      (1, 1), (1, 2), (2, 0), (2, 1), (3, 0)]
+        goalRed8 = [(7, 7), (7, 6), (7, 5), (7, 4), (6, 7),(6, 6), (6, 5), (5, 7), (5, 6), (4, 7)]
+        goalGreen8 = [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0),(1, 1), (1, 2), (2, 0), (2, 1), (3, 0)]
 
         # list of posisi goal yang harus dituju untuk size papan 10
-        goalRed10 = [(9, 9), (9, 8), (9, 7), (9, 6), (9, 5), (8, 9), (8, 8),
-                     (8, 7), (8, 6), (7, 9), (7, 8), (7, 7), (6, 9), (6, 8), (5, 9)]
-        goalGreen10 = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1),
-                       (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (3, 0), (3, 1), (4, 0)]
+        goalRed10 = [(9, 9), (9, 8), (9, 7), (9, 6), (9, 5), (8, 9), (8, 8),(8, 7), (8, 6), (7, 9), (7, 8), (7, 7), (6, 9), (6, 8), (5, 9)]
+        goalGreen10 = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1),(1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (3, 0), (3, 1), (4, 0)]
 
         # list of posisi goal yang harus dituju untuk size papan 16
-        goalRed16 = [(15, 15), (15, 14), (15, 13), (15, 12), (15, 11), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11),
-                     (13, 15), (13, 14), (13, 13), (13, 12), (12, 15), (12, 14), (12, 13), (11, 15), (11, 14)]
-        goalGreen16 = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4),
-                       (2, 0), (2, 1), (2, 2), (2, 3), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1)]
+        goalRed16 = [(15, 15), (15, 14), (15, 13), (15, 12), (15, 11), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11),(13, 15), (13, 14), (13, 13), (13, 12), (12, 15), (12, 14), (12, 13), (11, 15), (11, 14)]
+        goalGreen16 = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4),(2, 0), (2, 1), (2, 2), (2, 3), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1)]
 
         if(self.size == 8):
             # jika ukuran papan 8x8
@@ -82,5 +80,43 @@ class Player:
                 self.listOfPion = pionGreen16
                 self.listOfGoal = goalGreen16
 
+    # getter
+    def getListOfPion(self):
+        return self.listOfPion
 
-A = Player(8, 'R')
+    def getListOfGoal(self):
+        return self.listOfGoal
+
+    # setter
+    def removeGoal(self, position):
+        # position dalam bentuk tuple (baris,kolom)
+        # I.S. position selalu valid
+        self.listOfGoal.remove(position)
+
+    def movePion(self, currBaris, currKol, newBaris, newKol):
+        # Mengganti posisi pion curr menjadi new
+        for el in self.listOfPion:
+            if(el.getBaris() == currBaris)and(el.getKolom() == currKol):
+                # jika pion ditemukan
+                # set posisi baru untuk pion
+                el.setBaris(newBaris)
+                el.setKolom(newKol)
+                # jika sudah ditemukan keluar dari loop
+                break
+    
+    
+
+
+# contoh create player
+# this this this
+#  v v v v v v 
+
+# A = Player(8, 'R', 1)
+# for el in A.getListOfPion():
+#     print(el.getBaris() , el.getKolom())
+# print("=============")
+# A.movePion(0,0,2,1)
+# for el in A.getListOfPion():
+#     print(el.getBaris() , el.getKolom())
+# A.removeGoal((5,7))
+# print(A.getListOfGoal())
