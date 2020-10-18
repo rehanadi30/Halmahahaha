@@ -199,7 +199,7 @@ track = [15,10]
 matriks = [[0 for i in range(16)] for j in range(16)]
 
 while(start>=0):
-    current = track
+    current = track[:]
     for x in range(i):
         if(x!=0):
             current[0] = current[0] - 1
