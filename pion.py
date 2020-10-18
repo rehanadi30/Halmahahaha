@@ -1,5 +1,6 @@
 import pygame
 from konstanta import *
+#from main import getKoordinat
 
 class Pion:
     PADDING = 15
