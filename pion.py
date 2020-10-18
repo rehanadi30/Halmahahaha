@@ -1,4 +1,4 @@
-# import pygame
+import pygame
 from konstanta import *
 
 class Pion:
