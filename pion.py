@@ -11,7 +11,6 @@ class Pion:
         self.warna = warna
         self.status = status #1 or 2. Default: 1 for BOT 2 for player. Tapi karena ada algo vs algo bisa jadi bot vs bot
         self.goal = False
-        self.posisi()
         self.masukGoal()
 
     # Getter
