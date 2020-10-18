@@ -2,6 +2,7 @@
 import pygame
 from konstanta import *
 from board import Board
+from inputPage import *
 
 FPS = 60 #FPS game
 
@@ -9,20 +10,22 @@ pygame.display.set_caption('Halmahaha')
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 def main():
     #size = int(input("Masukkan ukuran papan: "))
-    run = True
     clock = pygame.time.Clock()
     papan = Board()
-
-    while run:
-        clock.tick(FPS)
-
+    inputUser = inputPage()
+    click = False
+    while True:
         for event in pygame.event.get():
             if(event.type == pygame.QUIT):
-                run = False
+                pygame.quit()
+              
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
-        papan.render(WIN)
+                if event.button == 1:
+                    click=True
+                    
+        inputUser.render(WIN,papan,click,FPS)
         pygame.display.update()
+        clock.tick(FPS)
 
     pygame.quit()
 
