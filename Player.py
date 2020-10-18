@@ -88,10 +88,10 @@ class Player:
         return self.listOfGoal
 
     # setter
-    def removeGoal(self, position):
-        # position dalam bentuk tuple (baris,kolom)
-        # I.S. position selalu valid
-        self.listOfGoal.remove(position)
+    # def removeGoal(self, position):
+    #     # position dalam bentuk tuple (baris,kolom)
+    #     # I.S. position selalu valid
+    #     self.listOfGoal.remove(position)
 
     def movePion(self, currBaris, currKol, newBaris, newKol):
         # Mengganti posisi pion curr menjadi new
@@ -102,14 +102,14 @@ class Player:
                 el.setBaris(newBaris)
                 el.setKolom(newKol)
                 # jika posisi pion yang baru berada di dalam list of goal, maka hapus goal
-                posisi=(el.getBaris(),el.getKolom())
-                if posisi in self.getListOfGoal():
-                    # remove goal
-                    self.removeGoal((el.getBaris(),el.getKolom()))
+                # posisi=(el.getBaris(),el.getKolom())
+                # if posisi in self.getListOfGoal():
+                #     # remove goal
+                #     self.removeGoal((el.getBaris(),el.getKolom()))
                 # jika sudah ditemukan keluar dari loop
                 break
 
-    
+
 # contoh create player
 # this this this
 #  v v v v v v 
