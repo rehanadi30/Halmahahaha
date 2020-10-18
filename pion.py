@@ -1,4 +1,4 @@
-import pygame
+# import pygame
 from konstanta import *
 
 
@@ -51,11 +51,11 @@ class Pion:
         self.x = SQUARE_SIZE * self.kolom + SQUARE_SIZE//2
         self.y = SQUARE_SIZE * self.baris + SQUARE_SIZE // 2
 
-    def render(self, win):
-        rad = SQUARE_SIZE//2 - self.PADDING
-        pygame.draw.circle(
-            win, self.WHITE, (self.x, self.y), rad + self.OUTLINE)
-        pygame.draw.circle(win, self.warna, (self.x, self.y), rad)
+    # def render(self, win):
+    #     rad = SQUARE_SIZE//2 - self.PADDING
+    #     pygame.draw.circle(
+    #         win, self.WHITE, (self.x, self.y), rad + self.OUTLINE)
+    #     pygame.draw.circle(win, self.warna, (self.x, self.y), rad)
 
-    def __repr__(self):  # mengatasi mengembalikan jenis objek
-        return str(self.warna)
+    # def __repr__(self):  # mengatasi mengembalikan jenis objek
+    #     return str(self.warna)
