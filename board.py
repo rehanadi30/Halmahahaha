@@ -1,6 +1,12 @@
 import pygame
 from konstanta import *
 
+def getKoordinat(pos, size):
+    x, y = pos
+    bar = y//(WIDTH//size)
+    kol = x//(WIDTH//size)
+    return bar, kol
+
 class Board:
     def __init__(self, size):
         self.board = []
@@ -91,7 +97,8 @@ class Board:
                     run = False
                     pygame.quit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    pass
+                    pos = pygame.mouse.get_pos()
+                    bar, kol = getKoordinat(pos, self.BSize)
                 
             # pos = pygame.mouse.get_pos()
             # bar, kol = getKoordinat(pos, size)

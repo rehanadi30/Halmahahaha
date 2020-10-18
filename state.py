@@ -189,55 +189,175 @@ class State:
 
 # # a.objectiveFunction()
 # a.hn(16)
+n = 10
+matriks = [[0 for i in range(n)] for j in range(n)]
 
-start = 10
 count = 1
-i = 3
-track = [15,10]
-
-
-matriks = [[0 for i in range(16)] for j in range(16)]
+if(n==16):
+    start = 12
+    i = 3
+    track = [15,10]
+    jump = 5
+elif(n==8):
+    start = 5
+    i = 2
+    track = [7,3]
+    jump = 5
+else:
+    start = 6
+    i = 2
+    track = [9,4]
+    jump = 7
 
 while(start>=0):
     current = track[:]
-    for x in range(i):
-        if(x!=0):
-            current[0] = current[0] - 1
-        print(current)
-        matriks[current[0]][current[1]] = count
-    print(track)
-        
-    print("")
-    for x in range(5):
-        if(x%2==0):
-            current[1] = current[1] + 1
+    if(start==0):
+        matriks[0][0] = count
+        if(n==10):
+            matriks[1][0] = count
+            matriks[0][1] = count
+    elif(start==1):
+        if(n==16 or n==8):
+            matriks[1][0] = count
+            matriks[2][0] = count
+            matriks[0][1] = count
+            matriks[1][1] = count
+            matriks[0][2] = count
         else:
-            current[0] = current[0] - 1
-        print(current)
-        matriks[current[0]][current[1]] = count
-    print(track)
-    print("")
+            matriks[2][0] = count
+            matriks[3][0] = count
+            matriks[1][1] = count
+            matriks[2][1] = count
+            matriks[0][2] = count
+            matriks[1][2] = count
+            matriks[0][3] = count
 
-    
-    for x in range(i):
-        if(x==0):
-            current[0] = current[0] - 1
-        else:
-            current[1] = current[1] + 1
-        print(current)
-        matriks[current[0]][current[1]] = count
-    print(track)
-    print("")
+    else:
+        for x in range(i):
+            if(x!=0):
+                current[0] = current[0] - 1
+            # print(current)
+            matriks[current[0]][current[1]] = count
+        # print("")
+
+        for x in range(jump):
+            if(x%2==0):
+                current[1] = current[1] + 1
+            else:
+                current[0] = current[0] - 1
+            # print(current)
+            matriks[current[0]][current[1]] = count
+        # print("")
+
+        for x in range(i):
+            if(x==0):
+                current[0] = current[0] - 1
+            else:
+                current[1] = current[1] + 1
+            # print(current)
+            matriks[current[0]][current[1]] = count
+        # print("")
     
     
     start-=1
     count+=1
     i+=1
     track[1]-=1
-    print(current)
-    print("--------------------------------")
+    # print(current)
+    # print("--------------------------------")
+
+for i in range(n):
+    for j in range(n):
+        print (str(matriks[i][j]) + " ",end="")
+    print(" ")
 
 
+
+
+##Hb
+
+print("")
+n = 10
+matriks1 = [[0 for i in range(n)] for j in range(n)]
+
+count = 1
+if(n==16):
+    start = 12
+    i = 3
+    track = [0,5]
+    jump = 5
+elif(n==8):
+    start = 5
+    i = 2
+    track = [0,4]
+    jump = 5
+else:
+    start = 6
+    i = 2
+    track = [0,5]
+    jump = 7
+
+while(start>=0):
+    current = track[:]
+    if(start==0):
+        matriks1[n-1][n-1] = count
+        if(n==10):
+            matriks1[n-1][n-2] = count
+            matriks1[n-2][n-1] = count
+    elif(start==1):
+        if(n==16 or n==8):
+            matriks1[n-3][n-1] = count
+            matriks1[n-2][n-1] = count
+            matriks1[n-2][n-2] = count
+            matriks1[n-1][n-2] = count
+            matriks1[n-1][n-3] = count
+        else:
+            matriks1[n-4][n-1] = count
+            matriks1[n-3][n-1] = count
+            matriks1[n-3][n-2] = count
+            matriks1[n-2][n-2] = count
+            matriks1[n-2][n-3] = count
+            matriks1[n-1][n-3] = count
+            matriks1[n-1][n-4] = count
+
+    else:
+        for x in range(i):
+            if(x!=0):
+                current[0] = current[0] + 1
+            # print(current)
+            matriks1[current[0]][current[1]] = count
+        # print("")
+
+        for x in range(jump):
+            if(x%2==0):
+                current[1] = current[1] - 1
+            else:
+                current[0] = current[0] + 1
+            # print(current)
+            matriks1[current[0]][current[1]] = count
+        # print("")
+
+        for x in range(i):
+            if(x==0):
+                current[0] = current[0] + 1
+            else:
+                current[1] = current[1] - 1
+            # print(current)
+            matriks1[current[0]][current[1]] = count
+        # print("")
+    
+    
+    start-=1
+    count+=1
+    i+=1
+    track[1]+=1
+    # print(current)
+    # print("--------------------------------")
+
+for i in range(n):
+    for j in range(n):
+        print (str(matriks1[i][j]) + " ",end="")
+    print(" ")
 
 
 
