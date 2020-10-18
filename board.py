@@ -2,12 +2,13 @@ import pygame
 from konstanta import *
 
 class Board:
-    def __init__(self):
+    def __init__(self, size):
         self.board = []
-        self.BSize = SIZE
+        self.BSize = size
         self.bidakTerpilih = None
 
     def render(self, win,FPS):
+        SQUARE_SIZE = WIDTH // self.BSize
         clock = pygame.time.Clock()
         run = True
         while run:
@@ -91,6 +92,10 @@ class Board:
                     pygame.quit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     pass
+                
+            # pos = pygame.mouse.get_pos()
+            # bar, kol = getKoordinat(pos, size)
+            # print(bar, kol)
 
             pygame.display.update()
             clock.tick(FPS)
