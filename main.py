@@ -7,11 +7,18 @@ FPS = 60 #FPS game
 
 pygame.display.set_caption('Halmahaha')
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+
+def getKoordinat(pos, size):
+    x, y = pos
+    bar = y//(WIDTH//size)
+    kol = x//(WIDTH//size)
+    return bar, kol
+
 def main():
-    #size = int(input("Masukkan ukuran papan: "))
+    size = int(input("Masukkan ukuran papan: "))
     run = True
     clock = pygame.time.Clock()
-    papan = Board()
+    papan = Board(size)
 
     while run:
         clock.tick(FPS)
@@ -20,7 +27,9 @@ def main():
             if(event.type == pygame.QUIT):
                 run = False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+                pos = pygame.mouse.get_pos()
+                bar, kol = getKoordinat(pos, size)
+                print(bar, kol)
         papan.render(WIN)
         pygame.display.update()
 

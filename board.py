@@ -1,13 +1,14 @@
 import pygame
 from konstanta import *
 
-class Board():
-    def __init__(self):
+class Board:
+    def __init__(self, size):
         self.board = []
-        self.BSize = SIZE
+        self.BSize = size
         self.bidakTerpilih = None
 
     def render(self, win):
+        SQUARE_SIZE = WIDTH // self.BSize
         win.fill(GREY)
         for baris in range(self.BSize):
             for kolom in range(baris%2, self.BSize, 2):

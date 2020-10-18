@@ -1,7 +1,7 @@
 #Size papan
 WIDTH, HEIGHT = 720, 720
-SIZE = 16
-SQUARE_SIZE = WIDTH//SIZE
+SIZE = 16 #Cuma bisa 8,10,16
+#SQUARE_SIZE = WIDTH//SIZE
 
 #Warna
 RED = (255, 0, 0)
