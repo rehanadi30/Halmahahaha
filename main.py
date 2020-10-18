@@ -21,14 +21,18 @@ def main():
     papan = Board(size)
     inputUser = inputPage()
     click = False
-    while True:
+    runHome =True
+    while runHome:
         for event in pygame.event.get():
             if(event.type == pygame.QUIT):
+                runHome=False
                 pygame.quit()
               
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     click=True
+                    runHome=False
+                    
                     
         inputUser.render(WIN,papan,click,FPS)
         pygame.display.update()

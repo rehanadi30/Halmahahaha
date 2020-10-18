@@ -34,9 +34,13 @@ class Pion:
         self.kolom = newKolom
 
     def isJump(self):
+        # mengembalikan true jika bergerak melompati satu bidak
+        # else false
         pass
 
     def isMove(self):
+        # mengembalikan true jika bergerak/berpindah satu kotak
+        # else false
         pass
 
     def isGoal(self, size):

@@ -12,7 +12,7 @@ class inputPage:
     def render(self,screen,board,click,FPS):
         screen.fill(YELLOW)
         screen.blit(self.background, (0,0))
-        
+
         mx, my = pygame.mouse.get_pos()
 
         startImg= pygame.image.load("./img/startButton.png")
