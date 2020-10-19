@@ -1,6 +1,7 @@
 from Player import *
 from board import *
 from pion import *
+from konstanta import Infinity
 
 class State:
 
@@ -9,6 +10,7 @@ class State:
         self.p2 =  p2 #pemain
         self.board = board
         self.turn = turn
+        self.nilai = self.objectiveFunction()
         # self.time = 
 
     def getPlayer1(self):
@@ -25,6 +27,9 @@ class State:
 
     def GetTurn(self):
         return self.turn
+
+    def getNilai(self):
+        return self.nilai
 
     def isGoal(self,pos,player):
         goal = player.getListOfGoal()

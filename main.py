@@ -6,7 +6,7 @@ from inputPage import *
 
 FPS = 60 #FPS game
 
-pygame.display.set_caption('Halmahaha')
+pygame.display.set_caption('Halmahahaha')
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 def main():
