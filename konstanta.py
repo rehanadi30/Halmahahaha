@@ -11,3 +11,6 @@ BLACK = (0, 0, 0)
 YELLOW = (249, 166, 2)
 BLUE = (0, 64, 255)
 GREY = (128, 128, 128)
+
+#Nilai khusus
+Infinity = float('inf')
