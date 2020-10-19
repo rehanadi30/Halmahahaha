@@ -10,7 +10,7 @@ def Minimax(state, depth, isMaximizing=True, time):
     if(isMaximizing == True):
         for(i in range(0, board.BSize)):
             for (j in range(0, board.BSize)):
-                if(state.isValidMove()):
+                if(bestMove.isValidMove()):
                     possibleNextMove = Minimax(state, depth+1, False, time)
                     if(possibleNextMove.getNilai() > bestMove.getNilai()):
                         bestMove = possibleNextMove
@@ -19,9 +19,9 @@ def Minimax(state, depth, isMaximizing=True, time):
     elif(isMaximizing == False):
         for (i in range(0, board.BSize)):
             for (j in range(0, board.BSize)):
-                if (state.isValidMove()):
+                if (bestMove.isValidMove()):
                     possibleNextMove = Minimax(state, depth + 1, True, time)
-                    if (possibleNextMove.getNilai() > bestMove.getNilai()):
+                    if (possibleNextMove.getNilai() < bestMove.getNilai()):
                         bestMove = possibleNextMove
 
     return bestMove
