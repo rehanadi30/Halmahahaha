@@ -11,7 +11,7 @@ class Pion:
         self.warna = warna
         self.status = status #1 or 2. Default: 1 for BOT 2 for player. Tapi karena ada algo vs algo bisa jadi bot vs bot
         self.goal = False
-        self.masukGoal()
+        # self.masukGoal()
 
     # Getter
     def getBaris(self):
@@ -35,64 +35,56 @@ class Pion:
 
     def isJump(self, newBaris, newKolom, papan):
         # I.S. blok pasti valid atau ada dalam board
-        # mengembalikan true jika bergerak melompati satu bidak
+        # mengembalikan True jika bergerak melompati satu bidak
         # else false
 
         # jika posisi baru yang ingin ditempati kosong
-        if(papan[newBaris][newKolom]=='N'):
+        if(papan.getColor(newBaris,newKolom)=='n'):
             # melakukan lompatan vertikal
             if(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()):
                 # lompatan ke atas
                 # True jika satu kotak di depannya terdapat bidak
-                pass
-                # if papan[self.getBaris()-1][self.getKolom()] != Kosong
-                # return true
+                if papan.getColor(self.getBaris()-1,self.getKolom()) != 'n':
+                    return True
             elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()):
                 # lompatan ke bawah
                 # True jika satu kotak di depannya terdapat bidak
-                pass
-                # if papan[self.getBaris()+1][self.getKolom()] != Kosong
-                # return true
+                if papan.getColor(self.getBaris()+1,self.getKolom()) != 'n':
+                    return True
 
             # melakukan lompatan horizontal
             elif(newBaris==self.getBaris())and(newKolom==self.getKolom()-2):
                 # lompatan ke kiri
                 # True jika satu kotak di depannya terdapat bidak
-                pass
-                # if papan[self.getBaris()][self.getKolom()-1] != Kosong
-                # return true
+                if papan.getColor(self.getBaris(),self.getKolom()-1) != 'n':
+                    return True
             elif(newBaris==self.getBaris())and(newKolom==self.getKolom()+2):
                 # lompatan ke kanan
                 # True jika satu kotak di depannya terdapat bidak
-                pass
-                # if papan[self.getBaris()][self.getKolom()+1] != Kosong
-                # return true
+                if papan.getColor(self.getBaris(),self.getKolom()+1) != 'n':
+                    return True
 
             # melakukan lompatan diagonal
             elif(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()+2):
                 # lompatan ke kanan atas
                 # True jika satu kotak di depannya terdapat bidak
-                pass
-                # if papan[self.getBaris()-1][self.getKolom()+1] != Kosong
-                # return true
+                if papan.getColor(self.getBaris()-1,self.getKolom()+1) != 'n':
+                    return True
             elif(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()-2):
                 # lompatan ke kiri atas
                 # True jika satu kotak di depannya terdapat bidak
-                pass
-                # if papan[self.getBaris()-1][self.getKolom()-1] != Kosong
-                # return true
+                if papan.getColor(self.getBaris()-1,self.getKolom()-1) != 'n':
+                    return True
             elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()+2):
                 # lompatan ke kanan bawah
                 # True jika satu kotak di depannya terdapat bidak
-                pass
-                # if papan[self.getBaris()+1][self.getKolom()+1] != Kosong
-                # return true
+                if papan.getColor(self.getBaris()+1,self.getKolom()+1) != 'n':
+                    return True
             elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()-2):
                 # lompatan ke kiri bawah
                 # True jika satu kotak di depannya terdapat bidak
-                pass
-                # if papan[self.getBaris()+1][self.getKolom()-1] != Kosong
-                # return true
+                if papan.getColor(self.getBaris()+1,self.getKolom()-1) != 'n':
+                    return True
             
             # selain itu bukan jump
             else:
@@ -102,11 +94,11 @@ class Pion:
 
     def isMove(self, newBaris, newKolom, papan):
         # I.S. blok pasti valid atau ada dalam board
-        # mengembalikan true jika bergerak/berpindah satu kotak
+        # mengembalikan True jika bergerak/berpindah satu kotak
         # else false
 
         # jika posisi baru yang ingin ditempati kosong
-        if(papan[newBaris][newKolom]=='N'):
+        if(papan.getColor(newBaris,newKolom)=='n'):
             # melakukan move vertikal
             if(newBaris==self.getBaris()-1)and(newKolom==self.getKolom()):
                 # move ke atas
@@ -168,9 +160,9 @@ class Pion:
                 elif (size == 8):
                     return (self.getBaris() + self.getKolom() > 11)
 
-    def masukGoal(self):
+    def masukGoal(self,size):
     #Buat ngubah state goal. Setiap isGoal berubah status, fungsi ini dipanggil
-        if(self.isGoal()):
+        if(self.isGoal(size)):
             self.goal = True
         else:
             self.goal = False

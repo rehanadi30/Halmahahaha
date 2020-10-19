@@ -4,7 +4,7 @@ from pion import *
 class Player:
     def __init__(self, sizePapan, color, status):
         self.size = sizePapan  # ukuran papan
-        self.color = color  # warna pemain
+        self.color = color  # warna pemain 'R' untuk red dan 'G' untuk green
         self.status = status  # 1 for BOT, 2 for player
 
         # list of pion yang dimiliki player jika ukuran papan 8
@@ -86,6 +86,20 @@ class Player:
 
     def getListOfGoal(self):
         return self.listOfGoal
+    
+    def getColorPlayer(self):
+        return self.color
+
+    def getStatus(self):
+        return self.status
+    
+    def getPion(self, baris, kolom):
+        # cek list pion
+        for el in self.getListOfPion():
+            if(el.getBaris()==baris)and(el.getKolom()==kolom):
+                # pion ditemukan
+                return el
+        return None
 
     # setter
     # def removeGoal(self, position):
