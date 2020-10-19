@@ -5,12 +5,12 @@ from konstanta import Infinity
 
 class State:
 
-    def __init__(self,p1,p2,papan,turn, nilai=-Infinity):
+    def __init__(self,p1,p2,papan,turn):
         self.p1 = p1 #bot
         self.p2 =  p2 #pemain
         self.board = board
         self.turn = turn
-        self.nilai = nilai
+        self.nilai = self.objectiveFunction()
         # self.time = 
 
     def getPlayer1(self):
