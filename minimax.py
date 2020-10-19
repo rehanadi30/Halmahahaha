@@ -8,8 +8,8 @@ def Minimax(state, depth, isMaximizing=True, time):
         return bestMove
     #Buat player
     if(isMaximizing == True):
-        for(i in range(0, board.BSize)):
-            for (j in range(0, board.BSize)):
+        for i in range(0, board.BSize):
+            for j in range(0, board.BSize):
                 if(bestMove.isValidMove()):
                     possibleNextMove = Minimax(state, depth+1, False, time)
                     if(possibleNextMove.getNilai() > bestMove.getNilai()):
@@ -17,8 +17,8 @@ def Minimax(state, depth, isMaximizing=True, time):
 
     # Buat player
     elif(isMaximizing == False):
-        for (i in range(0, board.BSize)):
-            for (j in range(0, board.BSize)):
+        for i in range(0, board.BSize):
+            for j in range(0, board.BSize):
                 if (bestMove.isValidMove()):
                     possibleNextMove = Minimax(state, depth + 1, True, time)
                     if (possibleNextMove.getNilai() < bestMove.getNilai()):
