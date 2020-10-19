@@ -37,14 +37,14 @@ class Board:
 
 
                 #Daerah User
-                pygame.draw.line(win, RED, (495, 720), (495, 630), 8)
-                pygame.draw.line(win, RED, (495, 630), (540, 630), 8)
-                pygame.draw.line(win, RED, (540, 630), (540, 585), 8)
-                pygame.draw.line(win, RED, (540, 585), (585, 585), 8)
-                pygame.draw.line(win, RED, (585, 585), (585, 540), 8)
-                pygame.draw.line(win, RED, (585, 540), (630, 540), 8)
-                pygame.draw.line(win, RED, (630, 540), (630, 495), 8)
-                pygame.draw.line(win, RED, (630, 495), (720, 495), 8)
+                pygame.draw.line(win, GREEN, (495, 720), (495, 630), 8)
+                pygame.draw.line(win, GREEN, (495, 630), (540, 630), 8)
+                pygame.draw.line(win, GREEN, (540, 630), (540, 585), 8)
+                pygame.draw.line(win, GREEN, (540, 585), (585, 585), 8)
+                pygame.draw.line(win, GREEN, (585, 585), (585, 540), 8)
+                pygame.draw.line(win, GREEN, (585, 540), (630, 540), 8)
+                pygame.draw.line(win, GREEN, (630, 540), (630, 495), 8)
+                pygame.draw.line(win, GREEN, (630, 495), (720, 495), 8)
 
             elif(self.BSize==10):
                 # Daerah BOT
@@ -60,16 +60,16 @@ class Board:
                 pygame.draw.line(win, RED, (360, 72), (360, 0), 8)
 
                 # Daerah User
-                pygame.draw.line(win, RED, (360, 720), (360, 648), 8)
-                pygame.draw.line(win, RED, (360, 648), (432, 648), 8)
-                pygame.draw.line(win, RED, (432, 648), (432, 576), 8)
-                pygame.draw.line(win, RED, (432, 576), (504, 576), 8)
-                pygame.draw.line(win, RED, (504, 576), (504, 504), 8)
-                pygame.draw.line(win, RED, (504, 504), (576, 504), 8)
-                pygame.draw.line(win, RED, (576, 504), (576, 432), 8)
-                pygame.draw.line(win, RED, (576, 432), (648, 432), 8)
-                pygame.draw.line(win, RED, (648, 432), (648, 360), 8)
-                pygame.draw.line(win, RED, (648, 360), (720, 360), 8)
+                pygame.draw.line(win, GREEN, (360, 720), (360, 648), 8)
+                pygame.draw.line(win, GREEN, (360, 648), (432, 648), 8)
+                pygame.draw.line(win, GREEN, (432, 648), (432, 576), 8)
+                pygame.draw.line(win, GREEN, (432, 576), (504, 576), 8)
+                pygame.draw.line(win, GREEN, (504, 576), (504, 504), 8)
+                pygame.draw.line(win, GREEN, (504, 504), (576, 504), 8)
+                pygame.draw.line(win, GREEN, (576, 504), (576, 432), 8)
+                pygame.draw.line(win, GREEN, (576, 432), (648, 432), 8)
+                pygame.draw.line(win, GREEN, (648, 432), (648, 360), 8)
+                pygame.draw.line(win, GREEN, (648, 360), (720, 360), 8)
 
             elif(self.BSize==8):
                 # Daerah BOT
@@ -91,7 +91,7 @@ class Board:
                 pygame.draw.line(win, RED, (540, 450), (630, 450), 8)
                 pygame.draw.line(win, RED, (630, 450), (630, 360), 8)
                 pygame.draw.line(win, RED, (630, 360), (720, 360), 8)
-            
+
             for event in pygame.event.get():
                 if(event.type == pygame.QUIT):
                     run = False
@@ -99,7 +99,7 @@ class Board:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     pos = pygame.mouse.get_pos()
                     bar, kol = getKoordinat(pos, self.BSize)
-                
+
             # pos = pygame.mouse.get_pos()
             # bar, kol = getKoordinat(pos, size)
             # print(bar, kol)
