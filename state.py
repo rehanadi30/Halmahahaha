@@ -231,15 +231,14 @@ class State:
         print("g2 = " + str(g2))
         print("h1 = " + str(h1))
         print("h2 = " + str(h2))
-        f1 = g1 + h1
-        f2 = g2 + h2
-        f = f1 - f2
+        # f1 = g1 + h1
+        # f2 = g2 + h2
+        # f = f1 - f2
+        f = g1-g2-h1+h2
         print("f1 = " + str(f1))
         print("f2 = " + str(f2))
         print("f = " + str(f))
-
-
-        return
+        return f
     
     def isGameOver(self):
         if(len(self.p1.getListOfGoal)==0 or len(self.p1.getListOfGoal)==0):
