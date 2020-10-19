@@ -2,6 +2,8 @@ from state import *
 
 def Minimax(state, depth, isMaximizing=True, time):
     bestMove = state
+
+    #Buat kasus atomic (Daun gapunya anak)
     if(bestMove != None):
         return bestMove
     #Buat player
@@ -10,17 +12,16 @@ def Minimax(state, depth, isMaximizing=True, time):
             for (j in range(0, board.BSize)):
                 if(state.isValidMove()):
                     possibleNextMove = Minimax(state, depth+1, False, time)
-                    if(state.getNilai() > bestMove.getNilai()):
-                        return state
-                    else:
-                        return bestMove
-        # Buat player
-        elif(isMaximizing == False):
-            for (i in range(0, board.BSize)):
-                for (j in range(0, board.BSize)):
-                    if (state.isValidMove()):
-                        possibleNextMove = Minimax(state, depth + 1, True, time)
-                        if (state.getNilai() > bestMove.getNilai()):
-                            return state
-                        else:
-                            return bestMove
+                    if(possibleNextMove.getNilai() > bestMove.getNilai()):
+                        bestMove = possibleNextMove
+
+    # Buat player
+    elif(isMaximizing == False):
+        for (i in range(0, board.BSize)):
+            for (j in range(0, board.BSize)):
+                if (state.isValidMove()):
+                    possibleNextMove = Minimax(state, depth + 1, True, time)
+                    if (possibleNextMove.getNilai() > bestMove.getNilai()):
+                        bestMove = possibleNextMove
+
+    return bestMove
