@@ -27,7 +27,6 @@ def main():
                     click=True
                     runHome=False
                     
-                    
         inputUser.render(WIN,papan,click,FPS)
         pygame.display.update()
         clock.tick(FPS)
