@@ -33,15 +33,116 @@ class Pion:
     def setKolom(self, newKolom):
         self.kolom = newKolom
 
-    def isJump(self):
+    def isJump(self, newBaris, newKolom, papan):
+        # I.S. blok pasti valid atau ada dalam board
         # mengembalikan true jika bergerak melompati satu bidak
         # else false
-        pass
 
-    def isMove(self):
+        # jika posisi baru yang ingin ditempati kosong
+        if(papan[newBaris][newKolom]=='N'):
+            # melakukan lompatan vertikal
+            if(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()):
+                # lompatan ke atas
+                # True jika satu kotak di depannya terdapat bidak
+                pass
+                # if papan[self.getBaris()-1][self.getKolom()] != Kosong
+                # return true
+            elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()):
+                # lompatan ke bawah
+                # True jika satu kotak di depannya terdapat bidak
+                pass
+                # if papan[self.getBaris()+1][self.getKolom()] != Kosong
+                # return true
+
+            # melakukan lompatan horizontal
+            elif(newBaris==self.getBaris())and(newKolom==self.getKolom()-2):
+                # lompatan ke kiri
+                # True jika satu kotak di depannya terdapat bidak
+                pass
+                # if papan[self.getBaris()][self.getKolom()-1] != Kosong
+                # return true
+            elif(newBaris==self.getBaris())and(newKolom==self.getKolom()+2):
+                # lompatan ke kanan
+                # True jika satu kotak di depannya terdapat bidak
+                pass
+                # if papan[self.getBaris()][self.getKolom()+1] != Kosong
+                # return true
+
+            # melakukan lompatan diagonal
+            elif(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()+2):
+                # lompatan ke kanan atas
+                # True jika satu kotak di depannya terdapat bidak
+                pass
+                # if papan[self.getBaris()-1][self.getKolom()+1] != Kosong
+                # return true
+            elif(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()-2):
+                # lompatan ke kiri atas
+                # True jika satu kotak di depannya terdapat bidak
+                pass
+                # if papan[self.getBaris()-1][self.getKolom()-1] != Kosong
+                # return true
+            elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()+2):
+                # lompatan ke kanan bawah
+                # True jika satu kotak di depannya terdapat bidak
+                pass
+                # if papan[self.getBaris()+1][self.getKolom()+1] != Kosong
+                # return true
+            elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()-2):
+                # lompatan ke kiri bawah
+                # True jika satu kotak di depannya terdapat bidak
+                pass
+                # if papan[self.getBaris()+1][self.getKolom()-1] != Kosong
+                # return true
+            
+            # selain itu bukan jump
+            else:
+                return False
+        else:
+            return False
+
+    def isMove(self, newBaris, newKolom):
+        # I.S. blok pasti valid atau ada dalam board
         # mengembalikan true jika bergerak/berpindah satu kotak
         # else false
-        pass
+
+        # jika posisi baru yang ingin ditempati kosong
+        if(papan[newBaris][newKolom]=='N'):
+            # melakukan move vertikal
+            if(newBaris==self.getBaris()-1)and(newKolom==self.getKolom()):
+                # move ke atas
+                return True
+            elif(newBaris==self.getBaris()+1)and(newKolom==self.getKolom()):
+                # move ke bawah
+                return True
+
+            # melakukan move horizontal
+            elif(newBaris==self.getBaris())and(newKolom==self.getKolom()-1):
+                # move ke kiri
+                return True
+            elif(newBaris==self.getBaris())and(newKolom==self.getKolom()+1):
+                # move ke kanan
+                return True
+
+            # melakukan lompatan diagonal
+            elif(newBaris==self.getBaris()-1)and(newKolom==self.getKolom()+1):
+                # move ke kanan atas
+                return True
+            elif(newBaris==self.getBaris()-1)and(newKolom==self.getKolom()-1):
+                # move ke kiri atas
+                return True
+            elif(newBaris==self.getBaris()+1)and(newKolom==self.getKolom()+1):
+                # move ke kanan bawah
+                return True
+            elif(newBaris==self.getBaris()+1)and(newKolom==self.getKolom()-1):
+                # move ke kiri bawah
+                return True
+            
+            # selain itu bukan jump
+            else:
+                return False
+        else:
+            return False
+
 
     def isGoal(self, size):
     #Boolean, ngereturn kondisi ketika masuk kondisi goal
