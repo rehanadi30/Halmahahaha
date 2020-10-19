@@ -101,11 +101,6 @@ class Player:
                 # set posisi baru untuk pion
                 el.setBaris(newBaris)
                 el.setKolom(newKol)
-                # jika posisi pion yang baru berada di dalam list of goal, maka hapus goal
-                # posisi=(el.getBaris(),el.getKolom())
-                # if posisi in self.getListOfGoal():
-                #     # remove goal
-                #     self.removeGoal((el.getBaris(),el.getKolom()))
                 # jika sudah ditemukan keluar dari loop
                 break
 
