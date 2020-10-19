@@ -100,7 +100,7 @@ class Pion:
         else:
             return False
 
-    def isMove(self, newBaris, newKolom):
+    def isMove(self, newBaris, newKolom, papan):
         # I.S. blok pasti valid atau ada dalam board
         # mengembalikan true jika bergerak/berpindah satu kotak
         # else false

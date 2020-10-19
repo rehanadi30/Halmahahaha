@@ -16,7 +16,7 @@ class papan:
         #         if(i<(self.bsize/2) && j<(self.bsize/2)-i){
         #             self.color[i][j]='red';
         #         }elif(i>=(self.bsize/2) && j)
-        if(self.size==8){
+        if(self.size==8):
             self.color[0][0] = 'r';
             self.color[0][1] = 'r';
             self.color[0][2] = 'r';
@@ -37,7 +37,7 @@ class papan:
             self.color[7][5] = 'g';
             self.color[7][6] = 'g';
             self.color[7][7] = 'g';
-        }elif(self.size==10){
+        elif(self.size==10):
             self.color[0][0] = 'r';
             self.color[0][1] = 'r';
             self.color[0][2] = 'r';
@@ -68,7 +68,7 @@ class papan:
             self.color[9][7] = 'g';
             self.color[9][8] = 'g';
             self.color[9][9] = 'g';
-        }elif(self.size==16){
+        elif(self.size==16):
             self.color[0][0] = 'r';
             self.color[0][1] = 'r';
             self.color[0][2] = 'r';
@@ -141,4 +141,4 @@ class papan:
             self.color[15][13] = 'g';
             self.color[15][14] = 'g';
             self.color[15][15] = 'g';
-        }
+        

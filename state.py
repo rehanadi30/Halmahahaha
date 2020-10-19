@@ -1,5 +1,6 @@
 from Player import *
 from board import *
+from pion import *
 
 class State:
 
@@ -31,6 +32,14 @@ class State:
             if(pos[0]==goal[i][0] and pos[1]==goal[i][1]):
                 return True
         return False
+    
+    def movePioninOneTurn(self,pion):
+        currPlayer = self.turn[:]
+        while(self.turn == currPlayer):
+            # pion move jika perpindahan valid
+            if(pion.isJump()):
+                currPlayer.movePion(pion.getBaris(), pion.getKolom(), newBaris, newKol)
+    
 
     def ha(self,n):
 
