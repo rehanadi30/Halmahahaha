@@ -1,5 +1,6 @@
 import pygame
 from konstanta import *
+from Player import *
 
 class papan:
     def __init__(self,bsize):
@@ -8,7 +9,13 @@ class papan:
         self.init_board()
 
     def getSize(self):
-        return self.size;
+        return self.size
+
+    def changeColor(self, col, bar, warna):
+        self.color[bar][col]= warna
+
+    def getColor(self, bar, col):
+        return self.color[bar][col]
 
     def init_board(self):
         # for i in range(self.bsize):
