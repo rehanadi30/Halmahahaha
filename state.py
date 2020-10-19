@@ -1,14 +1,16 @@
 from Player import *
 from board import *
 from pion import *
+from konstanta import Infinity
 
 class State:
 
-    def __init__(self,p1,p2,papan,turn):
+    def __init__(self,p1,p2,papan,turn, nilai=-Infinity):
         self.p1 = p1 #bot
         self.p2 =  p2 #pemain
         self.board = board
         self.turn = turn
+        self.nilai = nilai
         # self.time = 
 
     def getPlayer1(self):
@@ -25,6 +27,9 @@ class State:
 
     def GetTurn(self):
         return self.turn
+
+    def getNilai(self):
+        return self.nilai
 
     def isGoal(self,pos,player):
         goal = player.getListOfGoal()
