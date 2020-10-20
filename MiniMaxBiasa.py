@@ -1,7 +1,16 @@
 import math
 import time
 
-def bestMove(state,botPlayer,humanPlayer,t):
+def max(a, b):
+    if(a>b):
+        return a
+    else:
+        return b
+
+def min(a, b):
+    return a + b - max(a, b)
+
+def bestMove(state, botPlayer, humanPlayer, t, alpha, beta):
     bestNilai = -math.inf
     timestart=time.time()
     while(time.time()<timestart+t):
@@ -18,7 +27,7 @@ def bestMove(state,botPlayer,humanPlayer,t):
                 # pindahkan pion
                 state.movePionMinimax(p,k,botPlayer)
                 # cek nilai minimax
-                newNilai = minimax(state,0,False,botPlayer,humanPlayer)
+                newNilai = minimax(state,0,False,botPlayer,humanPlayer, alpha, beta)
                 # kembalikan state ke state sebelumnya
                 state.movePionMinimax(p,prevKoor,botPlayer)
 
@@ -30,13 +39,13 @@ def bestMove(state,botPlayer,humanPlayer,t):
                     currpion = botPlayer.getPion(currBarisPion,currKolomPion)
                     move=k
         
-    state.movePionMinimax(currpion,move,botPlayer)
+    state.movePionMinimax(currpion, move, botPlayer)
     
     
     state.switchTurn()
 
 
-def minimax(state, depth, isMaximizing, botPlayer, humanPlayer):
+def minimax(state, depth, isMaximizing, botPlayer, humanPlayer, alpha, beta):
     nilai = state.objectiveFunction()
     if(state.isGameOver() or depth==1):
         return nilai
@@ -55,12 +64,14 @@ def minimax(state, depth, isMaximizing, botPlayer, humanPlayer):
                 # pindahkan pion
                 state.movePionMinimax(p,k,botPlayer)
                 # cek nilai minimax
-                newNilai = minimax(state,(depth+1),False,botPlayer,humanPlayer)
+                newNilai = minimax(state,(depth+1),False,botPlayer,humanPlayer, alpha, beta)
                 # kembalikan state ke state sebelumnya
                 state.movePionMinimax(p,prevKoor,botPlayer)
                 # jika newNilai>bestNilai
-                if (newNilai>bestNilai):
-                    bestNilai=newNilai
+                bestNilai= max(bestNilai, newNilai)
+                alpha = max(bestNilai, alpha)
+                if(beta <= alpha):
+                    break
         return bestNilai
     else:
         bestNilai = math.inf
@@ -76,12 +87,14 @@ def minimax(state, depth, isMaximizing, botPlayer, humanPlayer):
                 # pindahkan pion
                 state.movePionMinimax(p,k,humanPlayer)
                 # cek nilai minimax
-                newNilai = minimax(state,(depth+1),True,botPlayer,humanPlayer)
+                newNilai = minimax(state,(depth+1),True,botPlayer,humanPlayer, alpha, beta)
                 # kembalikan state ke state sebelumnya
                 state.movePionMinimax(p,prevKoor,humanPlayer)
                 # jika newNilai>bestNilai
-                if (newNilai<bestNilai):
-                    bestNilai=newNilai
+                bestNilai = min(bestNilai, newNilai)
+                alpha = min(bestNilai, alpha)
+                if (beta <= alpha):
+                    break
         return bestNilai
 
 

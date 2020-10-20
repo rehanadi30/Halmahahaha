@@ -73,7 +73,7 @@ def moveOnePionStatusBOTM(state,player,enemy,t):
     #print kondisi papan setelah dilakukan perpindahan
     for el in state.getBoard().getMatrixofColor():
         print(el)
-    bestMove(state,player,enemy,t)
+    bestMove(state,player,enemy,t, -Infinity, Infinity)
     
     
 def moveOnePionStatusBOTMLS(state,player,enemy,t):
