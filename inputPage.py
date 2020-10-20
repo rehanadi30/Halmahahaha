@@ -10,7 +10,7 @@ class inputPage:
         self.background = pygame.image.load('./img/bg-2.png')
 
     def render(self,screen,board,click,FPS):
-        screen.fill(YELLOW)
+        screen.fill(YELLOW2)
         screen.blit(self.background, (0,0))
 
         mx, my = pygame.mouse.get_pos()
@@ -22,7 +22,9 @@ class inputPage:
 
         if buttonStart.collidepoint((mx,my)):
             if click:
+                # print("masuk click")
                 board.render(screen,FPS)
+                # board.pieces(8,screen)
         
         
 

@@ -15,6 +15,7 @@ def Minimax(state, depth, isMaximizing, time):
                 bestMove = possibleNextMove
             else:
                 break
+                #Pruning. Kalo dia udah kalah langsung ambil best move yang udah menang sejak awal
 
     # Buat minimizing agent
     elif(isMaximizing == False):
