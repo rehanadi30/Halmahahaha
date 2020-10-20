@@ -79,11 +79,12 @@ class Pion:
     def possibleMoveLS(self, state):
         owner = self.getPionOwner(state)
         enemy = self.getPionEnemy(state)
-        # result=[]
+        
         # posisi pion saat ini
         currBaris=self.getBaris()
         currKolom=self.getKolom()
         currKoor=(currBaris,currKolom)
+        result=(currBaris,currKolom)
         # iterasi semua block 
         for i in range(state.getBoard().getSize()):
             for j in range(state.getBoard().getSize()):
@@ -97,14 +98,14 @@ class Pion:
                             new1 = (i,j)
                             if(owner.getColorPlayer()=="R"):
                                 ha=state.ha(state.getBoard().getSize())
-                                result = ha[currBaris][currKolom]
-                                if(result > ha[i][j]):
+                                value = ha[currBaris][currKolom]
+                                if(value > ha[i][j]):
                                     # result.append(new1)
                                     result = new1
                             elif (owner.getColorPlayer()=="G"):
-                                hb=state.ha(state.getBoard().getSize())
-                                result = hb[currBaris][currKolom]
-                                if(result > hb[i][j]):
+                                hb=state.hb(state.getBoard().getSize())
+                                value = hb[currBaris][currKolom]
+                                if(value > hb[i][j]):
                                     # result.append(new1)
                                     result = new1
                     # jika posisi pion di rumah, bebas pindah kemanapun
@@ -114,14 +115,14 @@ class Pion:
                             new2 = (i,j)
                             if(owner.getColorPlayer()=="R"):
                                 ha=state.ha(state.getBoard().getSize())
-                                result = ha[currBaris][currKolom]
-                                if(result > ha[i][j]):
+                                value = ha[currBaris][currKolom]
+                                if(value > ha[i][j]):
                                     # result.append(new2)
                                     result = new2
                             elif (owner.getColorPlayer()=="G"):
-                                hb=state.ha(state.getBoard().getSize())
-                                result = hb[currBaris][currKolom]
-                                if(result > hb[i][j]):
+                                hb=state.hb(state.getBoard().getSize())
+                                value = hb[currBaris][currKolom]
+                                if(value > hb[i][j]):
                                     # result.append(new2)
                                     result = new2
                             
