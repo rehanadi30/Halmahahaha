@@ -4,7 +4,7 @@ def MinimaxLS(state, depth, isMaximizing=True, time):
     bestMove = state
     kemungkinanLangkah = LocalSearch(state, state.board.size)
 
-    #Buat kasus atomic (Daun gapunya anak)
+    #Buat kasus atomic (Daun gapunya anak karena udah menang)
     if(bestMove.isGameOver()):
         return bestMove
     #Buat maximizing agent
