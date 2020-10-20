@@ -4,9 +4,9 @@ def Minimax(state, depth, isMaximizing, time):
     bestMove = state
 
     #Buat kasus atomic (Daun gapunya anak)
-    if(bestMove != None):
+    if(bestMove.isGameOver()):
         return bestMove
-    #Buat player
+    #Buat maximizing agent
     if(isMaximizing == True):
         for kemungkinan in bestMove:
             possibleNextMove = Minimax(kemungkinan, depth + 1, False, time)
@@ -15,7 +15,7 @@ def Minimax(state, depth, isMaximizing, time):
             else:
                 break
 
-    # Buat player
+    # Buat minimizing agent
     elif(isMaximizing == False):
         for gerakan in possible:
             possibleNextMove = Minimax(gerakan, depth + 1, True, time)
