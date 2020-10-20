@@ -3,6 +3,7 @@ import pygame
 from konstanta import *
 from board import Board
 from inputPage import *
+from state import *
 
 FPS = 60 #FPS game
 
@@ -12,7 +13,10 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 def main():
     size = int(input("Masukkan ukuran papan: "))
     clock = pygame.time.Clock()
-    papan = Board(size)
+    playerRed = Player(size, 'R', 2) #pembuatan player merah
+    playerGreen = Player(size, 'G', 2) #pembuatan player hijau
+    state = State(playerRed, playerGreen,size) #pembuatan state
+    papan = Board(size,state)
     inputUser = inputPage()
     click = False
     runHome =True

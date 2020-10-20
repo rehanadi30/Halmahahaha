@@ -132,6 +132,7 @@ class State:
         if newKoor in currPlayer.getListOfGoal():
             currPlayer.removeGoal(newKoor)
     def movePioninOneTurn(self,pion,listOfNewPosition):
+        print("masukmovepioninoneturn")
         # List of new position --> list of tuple dari new position dari sebuah pion
         currPlayer=self.turn #player
         currColorPlayer = self.turn.getColorPlayer()[:] #warna player
