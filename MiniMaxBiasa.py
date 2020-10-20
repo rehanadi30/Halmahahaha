@@ -1,5 +1,6 @@
 import math
 import time
+from konstanta import Infinity
 
 def max(a, b):
     if(a>b):
@@ -51,7 +52,7 @@ def minimax(state, depth, isMaximizing, botPlayer, humanPlayer, alpha, beta):
         return nilai
         
     if(isMaximizing):
-        bestNilai = -math.inf
+        bestNilai = -Infinity
         # untuk semua pion yang dimiliki player
         for p in botPlayer.getListOfPion():
             # kemungkinan koordinat move pion
@@ -74,7 +75,7 @@ def minimax(state, depth, isMaximizing, botPlayer, humanPlayer, alpha, beta):
                     break
         return bestNilai
     else:
-        bestNilai = math.inf
+        bestNilai = Infinity
         # untuk semua pion yang dimiliki player
         for p in humanPlayer.getListOfPion():
             # kemungkinan koordinat move pion
@@ -92,7 +93,7 @@ def minimax(state, depth, isMaximizing, botPlayer, humanPlayer, alpha, beta):
                 state.movePionMinimax(p,prevKoor,humanPlayer)
                 # jika newNilai>bestNilai
                 bestNilai = min(bestNilai, newNilai)
-                alpha = min(bestNilai, alpha)
+                beta = min(bestNilai, alpha)
                 if (beta <= alpha):
                     break
         return bestNilai
