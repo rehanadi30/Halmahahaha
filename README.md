@@ -1,6 +1,6 @@
 # Halmahahaha
 
-Halmahahaha adalah suatu permainan Halma 2 pemain yang memiliki bot dengan algoritma Minimax dan Alpha-Beta Pruning
+Halmahahaha adalah suatu permainan Halma 2 pemain yang memiliki bot dengan algoritma Minimax dengan optimasi Alpha-Beta Pruning, dan algoritma minimax dengan local search
 
 ## Summary
 
