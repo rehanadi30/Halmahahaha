@@ -12,25 +12,20 @@ def bestMoveLS(state,botPlayer,humanPlayer,t):
             # kemungkinan koordinat move pion
             kemungkinan = p.possibleMoveLS(state)
             
-            # untuk semua kemungkinan dicek nilainya
-            for k in kemungkinan:         
-                prevBaris = p.getBaris()
-                prevKolom = p.getKolom()
-                prevKoor = (prevBaris,prevKolom)
-                # pindahkan pion
-                state.movePionMinimax(p,k,botPlayer)
-                # cek nilai minimax
-                newNilai = minimax(state,0,False,botPlayer,humanPlayer)
-                # kembalikan state ke state sebelumnya
-                state.movePionMinimax(p,prevKoor,botPlayer)
+            # untuk satu kemungkinan dicek nilainya
+            state.movePionMinimax(p,kemungkinan,botPlayer)
+            # cek nilai minimax
+            newNilai = minimaxLS(state,0,False,botPlayer,humanPlayer)
+            # kembalikan state ke state sebelumnya
+            state.movePionMinimax(p,prevKoor,botPlayer)
 
-                # jika newNilai>bestNilai
-                if (newNilai>bestNilai):
-                    bestNilai=newNilai
-                    currBarisPion = p.getBaris()
-                    currKolomPion = p.getKolom()
-                    currpion = botPlayer.getPion(currBarisPion,currKolomPion)
-                    move=k
+            # jika newNilai>bestNilai
+            if (newNilai>bestNilai):
+                bestNilai=newNilai
+                currBarisPion = p.getBaris()
+                currKolomPion = p.getKolom()
+                currpion = botPlayer.getPion(currBarisPion,currKolomPion)
+                move=kemungkinan
         
     state.movePionMinimax(currpion,move,botPlayer)
     
