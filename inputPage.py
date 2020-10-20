@@ -25,6 +25,7 @@ class inputPage:
                 # print("masuk click")
                 board.render(screen,FPS)
                 # board.pieces(8,screen)
+                print("GAMEOVER")
         
         
 

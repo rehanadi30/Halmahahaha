@@ -12,6 +12,8 @@ YELLOW = (249, 166, 2)
 BLUE = (0, 64, 255)
 GREY = (128, 128, 128)
 YELLOW2 = (255,215,125)
+BLUE1 = (104,172,222)
+RED1 = (213,93,124)
 
 #Nilai khusus
 Infinity = float('inf')
