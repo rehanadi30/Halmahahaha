@@ -1,6 +1,8 @@
 import pygame
 from konstanta import *
 from Player import *
+from minimax_LS import *
+from MiniMaxBiasa import *
 
 
 def getKoordinat(pos, size):
@@ -17,11 +19,12 @@ class Board:
     clickedButtons2=set()
     listofpion = []
 
-    def __init__(self, size,state):
+    def __init__(self, size,state,time):
         self.board = []
         self.BSize = size
         self.bidakTerpilih = None
         self.state = state
+        self.time = time
 
     # 
 
@@ -319,21 +322,37 @@ class Board:
             pygame.draw.rect(win, YELLOW, (285,745,150,50))
             if click1[0] == 1:
                 print("yeyy move")
-                x0 = listofpion.pop(0)
-                x1 = x0[0]
-                x2 = x0[1]
-                # print(self.state.getTurn())
-                player = self.state.getTurn()
-                
-                x = player.getPion(x1,x2)
-                print("listofpion",listofpion)
-                buang = listofpion.pop()
-                y = listofpion[:]
-                listofpion.clear()
-                # clickedButtons2.clear()
-                # clickedButtons.clear()
-                print(x0)
-                print(y)
+                if(self.state.getTurn().getStatus()==1):
+                    if(self.state.getTurn().getColorPlayer()=='R'): 
+                        enemy = self.state.getPlayer2()
+                    else:
+                        enemy = self.state.getPlayer1()
+                    bestMoveLS(self.state,self.state.getTurn(),enemy,self.time,-Infinity, Infinity)
+                    self.state.switchTurn()
+                    # counter=self.time+1
+                elif(self.state.getTurn().getStatus()==0):
+                    if(self.state.getTurn().getColorPlayer()=='R'): 
+                        enemy = self.state.getPlayer2()
+                    else:
+                        enemy = self.state.getPlayer1()
+                    bestMove(self.state,self.state.getTurn(),enemy,self.time,-Infinity, Infinity)
+                    # counter=self.time+1
+                else:
+                    x0 = listofpion.pop(0)
+                    x1 = x0[0]
+                    x2 = x0[1]
+                    # print(self.state.getTurn())
+                    player = self.state.getTurn()
+                    
+                    x = player.getPion(x1,x2)
+                    print("listofpion",listofpion)
+                    buang = listofpion.pop()
+                    y = listofpion[:]
+                    listofpion.clear()
+                    # clickedButtons2.clear()
+                    # clickedButtons.clear()
+                    print(x0)
+                    print(y)
 
                 # a = self.state.getPlayer1().getListOfPion()
                 # b = self.state.getPlayer2().getListOfPion()
@@ -342,9 +361,9 @@ class Board:
                 # print("")
                 # for i in range(len(b)):
                 #     print(b[i].getBaris(), b[i].getKolom())
-                self.state.movePioninOneTurn(x,y)
-                self.state.switchTurn()
-                clickedButtons.clear()
+                    self.state.movePioninOneTurn(x,y)
+                    self.state.switchTurn()
+                    clickedButtons.clear()
                 
 
                 # a = self.state.getPlayer1().getListOfPion()

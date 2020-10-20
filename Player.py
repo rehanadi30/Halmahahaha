@@ -16,6 +16,7 @@ class Player:
             Pion(7, 7, self.color, self.status), Pion(7, 6, self.color, self.status), Pion(7, 5, self.color, self.status), Pion(7, 4, self.color, self.status), Pion(6, 7, self.color, self.status),
             Pion(6, 6, self.color, self.status), Pion(6, 5, self.color, self.status), Pion(5, 7, self.color, self.status), Pion(5, 6, self.color, self.status), Pion(4, 7, self.color, self.status)
         ]
+        
 
         # list of pion yang dimiliki player jika ukuran papan 10
         pionRed10 = [
@@ -26,6 +27,7 @@ class Player:
             Pion(9, 9, self.color, self.status), Pion(9, 8, self.color, self.status), Pion(9, 7, self.color, self.status), Pion(9, 6, self.color, self.status), Pion(9, 5, self.color, self.status), Pion(8, 9, self.color, self.status), Pion(8, 8, self.color, self.status),
             Pion(8, 7, self.color, self.status), Pion(8, 6, self.color, self.status), Pion(7, 9, self.color, self.status), Pion(7, 8, self.color, self.status), Pion(7, 7, self.color, self.status), Pion(6, 9, self.color, self.status), Pion(6, 8, self.color, self.status), Pion(5, 9, self.color, self.status)
         ]
+        
         
         # list of pion yang dimiliki player jika ukuran papan 16
         pionRed16 = [
