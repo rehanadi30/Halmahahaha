@@ -9,13 +9,14 @@ def Minimax(state, depth, isMaximizing, time):
 
     #Buat maximizing agent
     if(isMaximizing == True):
-        for kemungkinan in bestMove.board.pion.possibleMove():
-            possibleNextMove = Minimax(kemungkinan, depth + 1, False, time)
-            if(possibleNextMove.getNilai() > bestMove.getNilai()):
-                bestMove = possibleNextMove
-            else:
-                break
-                #Pruning. Kalo dia udah kalah langsung ambil best move yang udah menang sejak awal
+        for pawn in bestMove.p1.board.listofpion:
+            for kemungkinan in pawn.possibleMove():
+                possibleNextMove = Minimax(kemungkinan, depth + 1, False, time)
+                if(possibleNextMove.getNilai() > bestMove.getNilai()):
+                    bestMove = possibleNextMove
+                else:
+                    break
+                    #Pruning. Kalo dia udah kalah langsung ambil best move yang udah menang sejak awal
 
     # Buat minimizing agent
     elif(isMaximizing == False):
