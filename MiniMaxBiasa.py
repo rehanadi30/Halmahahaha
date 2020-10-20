@@ -9,7 +9,10 @@ def max(a, b):
         return b
 
 def min(a, b):
-    return a + b - max(a, b)
+    if(a<b):
+        return a
+    else:
+        return b
 
 def bestMove(state, botPlayer, humanPlayer, t,alpha,beta):
     bestNilai = -math.inf
@@ -17,7 +20,7 @@ def bestMove(state, botPlayer, humanPlayer, t,alpha,beta):
     # init currpion
     currpion = botPlayer.getListOfPion()[0]
     # init move
-    move=currpion.possibleMove(state)[0]
+    move=None
     # while(time.time()<timestart+t):
         
     # untuk semua pion yang dimiliki player
@@ -44,7 +47,7 @@ def bestMove(state, botPlayer, humanPlayer, t,alpha,beta):
                 currKolomPion = p.getKolom()
                 currpion = botPlayer.getPion(currBarisPion,currKolomPion)
                 move=k
-        
+    
     state.movePionMinimax(currpion, move, botPlayer)
     state.switchTurn()
 
@@ -74,7 +77,8 @@ def minimax(state, depth, isMaximizing, botPlayer, humanPlayer,alpha,beta):
                 # kembalikan state ke state sebelumnya
                 state.movePionMinimax(p,prevKoor,botPlayer)
                 # jika newNilai>bestNilai
-                bestNilai= max(bestNilai, newNilai)
+                if (newNilai>bestNilai):
+                    bestNilai=newNilai
                 alpha = max(bestNilai, alpha)
                 if(beta <= alpha):
                     break
@@ -98,8 +102,9 @@ def minimax(state, depth, isMaximizing, botPlayer, humanPlayer,alpha,beta):
                 # kembalikan state ke state sebelumnya
                 state.movePionMinimax(p,prevKoor,humanPlayer)
                 # jika newNilai>bestNilai
-                bestNilai = min(bestNilai, newNilai)
-                alpha = min(bestNilai, alpha)
+                if (newNilai<bestNilai):
+                    bestNilai=newNilai
+                beta = min(bestNilai, beta)
                 if (beta <= alpha):
                     break
                

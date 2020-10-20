@@ -87,7 +87,7 @@ def moveOnePionStatusBOTMLS(state,player,enemy,t):
 # main program
 size = int(input("Masukkan ukuran papan: ")) #ukuran papan
 t = int(input("Masukkan time: ")) #lama waktu
-playerRed = Player(size, 'R', 2) #pembuatan player merah
+playerRed = Player(size, 'R', 1) #pembuatan player merah
 playerGreen = Player(size, 'G', 0) #pembuatan player hijau
 state = State(playerRed, playerGreen,size) #pembuatan state
 

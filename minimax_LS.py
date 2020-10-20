@@ -9,7 +9,10 @@ def max(a, b):
         return b
 
 def min(a, b):
-    return a + b - max(a, b)
+    if(a<b):
+        return a
+    else:
+        return b
 
 
 def bestMoveLS(state,botPlayer,humanPlayer,t,alpha,beta):
@@ -96,7 +99,7 @@ def minimaxLS(state, depth, isMaximizing, botPlayer, humanPlayer,alpha,beta):
         
             # jika newNilai>bestNilai
             bestNilai = min(bestNilai, newNilai)
-            alpha = min(bestNilai, alpha)
+            beta = min(bestNilai, beta)
             if (beta <= alpha):
                 break
         return bestNilai
