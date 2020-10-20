@@ -1,5 +1,6 @@
 from state import *
 import time
+from minimax import minimax
 
 def moveOnePionStatusPlayer(player,state):
     pionIsPlayers=False #validasi pion yang dipilih
@@ -51,8 +52,8 @@ def moveOnePionStatusPlayer(player,state):
         print("==================")
         state.switchTurn()
 
-def moveOnePionStatusBOTM(player,state):
-    pass
+def moveOnePionStatusBOTM(player, state):
+    gerakan = minimax(state, 0, True, tt)
 def moveOnePionStatusBOTMLS(player,state):
     pass
 
