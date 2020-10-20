@@ -5,7 +5,7 @@ from MiniMaxBiasa import *
 def moveOnePionStatusPlayer(player,state,t):
     timestart=time.time()
 
-    while(time.time()<=timestart+t):
+    while(time.time()<timestart+t):
         #print kondisi papan setelah dilakukan perpindahan
         for el in state.getBoard().getMatrixofColor():
             print(el)
@@ -68,11 +68,11 @@ def moveOnePionStatusPlayer(player,state,t):
     
     
 
-def moveOnePionStatusBOTM(state,player,enemy):
+def moveOnePionStatusBOTM(state,player,enemy,t):
     #print kondisi papan setelah dilakukan perpindahan
     for el in state.getBoard().getMatrixofColor():
         print(el)
-    bestMove(state,player,enemy)
+    bestMove(state,player,enemy,t)
     
     
 def moveOnePionStatusBOTMLS(state,player,enemy):
@@ -104,18 +104,18 @@ while not state.isGameOver():
                 print(el.getBaris() , el.getKolom())
         # status 1 sebagai BOT minimax-lS
         elif(playerRed.getStatus()==1):
-            moveOnePionStatusBOTMLS(state,playerRed,playerGreen)
+            moveOnePionStatusBOTMLS(state,playerRed,playerGreen,t)
         # status 0 sebagai BOT minimax
         elif(playerRed.getStatus()==0):
-            moveOnePionStatusBOTM(state,playerRed,playerGreen)
+            moveOnePionStatusBOTM(state,playerRed,playerGreen,t)
 
     elif(state.getTurn().getColorPlayer()=='G'): #turn playerGreen
         if(playerGreen.getStatus()==2):
             moveOnePionStatusPlayer(playerGreen,state,t)
         # status 1 sebagai BOT minimax-lS
         elif(playerGreen.getStatus()==1):
-            moveOnePionStatusBOTMLS(state,playerGreen,playerRed)
+            moveOnePionStatusBOTMLS(state,playerGreen,playerRed,t)
         # status 0 sebagai BOT minimax
         elif(playerGreen.getStatus()==0):
-            moveOnePionStatusBOTM(state,playerGreen,playerRed)
+            moveOnePionStatusBOTM(state,playerGreen,playerRed,t)
     
