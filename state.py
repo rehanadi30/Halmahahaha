@@ -109,9 +109,8 @@ class State:
     #         # pisisi sebelum diganti 'n'
     #         self.board.changeColor(prevRow, prevCol,'n')
     #         return prev
-    def movePionMinimax(self,pion,newPosition):
-        currPlayer=self.turn #player
-        currColorPlayer = self.turn.getColorPlayer()[:] #warna player
+    def movePionMinimax(self,pion,newPosition,currPlayer):
+        currColorPlayer = currPlayer.getColorPlayer()[:] #warna player
 
         newBaris = newPosition[0]
         newKolom = newPosition[1]

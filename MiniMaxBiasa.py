@@ -7,6 +7,7 @@ def bestMove(state,botPlayer,humanPlayer):
     for p in botPlayer.getListOfPion():
         # kemungkinan koordinat move pion
         kemungkinan = p.possibleMove(state)
+        
         # untuk semua kemungkinan dicek nilainya
         for k in kemungkinan: 
             print("awal")
@@ -16,23 +17,26 @@ def bestMove(state,botPlayer,humanPlayer):
             prevKoor = (prevBaris,prevKolom)
             print(prevKoor[0],prevKoor[1])
             # pindahkan pion
-            state.movePionMinimax(p,k)
+            state.movePionMinimax(p,k,botPlayer)
             # cek nilai minimax
             newNilai = minimax(state,0,False,botPlayer,humanPlayer)
             # kembalikan state ke state sebelumnya
-            state.movePionMinimax(p,prevKoor)
+            state.movePionMinimax(p,prevKoor,botPlayer)
 
             # jika newNilai>bestNilai
             if (newNilai>bestNilai):
                 bestNilai=newNilai
                 move=k
-    state.movePionMinimax(p,move)
+    state.movePionMinimax(p,move,botPlayer)
+    #print kondisi papan setelah dilakukan perpindahan
+    for el in state.getBoard().getMatrixofColor():
+        print(el)
     state.switchTurn()
 
 
 def minimax(state, depth, isMaximizing, botPlayer, humanPlayer):
     nilai = state.objectiveFunction()
-    if(state.isGameOver() or depth==3):
+    if(state.isGameOver() or depth==1):
         #print kondisi papan setelah dilakukan perpindahan
         for el in state.getBoard().getMatrixofColor():
             print(el)
@@ -53,12 +57,12 @@ def minimax(state, depth, isMaximizing, botPlayer, humanPlayer):
                 prevKolom = p.getKolom()
                 prevKoor = (prevBaris,prevKolom)
                 # pindahkan pion
-                state.movePionMinimax(p,k)
+                state.movePionMinimax(p,k,botPlayer)
                 print(prevKoor[0],prevKoor[1])
                 # cek nilai minimax
                 newNilai = minimax(state,(depth+1),False,botPlayer,humanPlayer)
                 # kembalikan state ke state sebelumnya
-                state.movePionMinimax(p,prevKoor)
+                state.movePionMinimax(p,prevKoor,botPlayer)
                 # jika newNilai>bestNilai
                 if (newNilai>bestNilai):
                     bestNilai=newNilai
@@ -77,12 +81,12 @@ def minimax(state, depth, isMaximizing, botPlayer, humanPlayer):
                 prevKolom = p.getKolom()
                 prevKoor = (prevBaris,prevKolom)
                 # pindahkan pion
-                state.movePionMinimax(p,k)
+                state.movePionMinimax(p,k,humanPlayer)
                 print(prevKoor[0],prevKoor[1])
                 # cek nilai minimax
                 newNilai = minimax(state,(depth+1),True,botPlayer,humanPlayer)
                 # kembalikan state ke state sebelumnya
-                state.movePionMinimax(p,prevKoor)
+                state.movePionMinimax(p,prevKoor,humanPlayer)
                 # jika newNilai>bestNilai
                 if (newNilai<bestNilai):
                     bestNilai=newNilai

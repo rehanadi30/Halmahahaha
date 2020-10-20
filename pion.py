@@ -1,4 +1,5 @@
 import pygame
+
 from konstanta import *
 
 class Pion:
@@ -248,3 +249,5 @@ class Pion:
     """
     def __repr__(self):
         return str(self.warna)
+
+

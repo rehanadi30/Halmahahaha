@@ -100,6 +100,8 @@ while not state.isGameOver():
         if(playerRed.getStatus()==2):
             
             moveOnePionStatusPlayer(playerRed,state,t)
+            for el in playerRed.getListOfPion():
+                print(el.getBaris() , el.getKolom())
         # status 1 sebagai BOT minimax-lS
         elif(playerRed.getStatus()==1):
             moveOnePionStatusBOTMLS(state,playerRed,playerGreen)
