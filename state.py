@@ -109,6 +109,29 @@ class State:
     #         # pisisi sebelum diganti 'n'
     #         self.board.changeColor(prevRow, prevCol,'n')
     #         return prev
+    def movePionMinimax(self,pion,newPosition):
+        currPlayer=self.turn #player
+        currColorPlayer = self.turn.getColorPlayer()[:] #warna player
+
+        newBaris = newPosition[0]
+        newKolom = newPosition[1]
+        # movement pasti valid
+        prevRow = pion.getBaris()
+        prevCol = pion.getKolom()
+        newRow = newBaris
+        newCol = newKolom
+        # pindahin pion ke posisi baru
+        currPlayer.movePion(pion.getBaris(), pion.getKolom(), newBaris, newKolom)
+        # ganti warna blok 
+        # posisi new diganti warna player
+        self.board.changeColor(newRow,newCol,currColorPlayer.lower())
+        # pisisi sebelum diganti 'n'
+        self.board.changeColor(prevRow, prevCol,'n')
+        # jika newRow dan newCol merupakan goal maka remove goal dari listofgoal
+        
+        newKoor=(newRow,newCol)
+        if newKoor in currPlayer.getListOfGoal():
+            currPlayer.removeGoal(newKoor)
     def movePioninOneTurn(self,pion,listOfNewPosition):
         # List of new position --> list of tuple dari new position dari sebuah pion
         currPlayer=self.turn #player
@@ -172,8 +195,7 @@ class State:
                         return False
 
         # jika pergerakan valid ubah warna di board
-        for el in currPlayer.getListOfPion():
-            print(el.getBaris() , el.getKolom())
+        
         # ganti warna blok 
         # posisi new diganti warna player
         self.board.changeColor(newRow,newCol,currColorPlayer.lower())
@@ -383,17 +405,14 @@ class State:
             y = pion2[i].getKolom()
             h2 += h2_size[x][y]
 
-        print("g1 = " + str(g1))
-        print("g2 = " + str(g2))
-        print("h1 = " + str(h1))
-        print("h2 = " + str(h2))
+        
         # f1 = g1 + h1
         # f2 = g2 + h2
         # f = f1 - f2
         f = g1-g2-h1+h2
         # print("f1 = " + str(f1))
         # print("f2 = " + str(f2))
-        print("f = " + str(f))
+       
         return f
     
     def isGameOver(self):

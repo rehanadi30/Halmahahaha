@@ -1,6 +1,6 @@
 from state import *
 import time
-from multiprocessing import Process
+from MiniMaxBiasa import *
 
 def moveOnePionStatusPlayer(player,state,t):
     timestart=time.time()
@@ -68,16 +68,23 @@ def moveOnePionStatusPlayer(player,state,t):
     
     
 
-def moveOnePionStatusBOTM(player,state):
+def moveOnePionStatusBOTM(state,player,enemy):
+    #print kondisi papan setelah dilakukan perpindahan
+    for el in state.getBoard().getMatrixofColor():
+        print(el)
+    bestMove(state,player,enemy)
+    
+    
+def moveOnePionStatusBOTMLS(state,player,enemy):
     pass
-def moveOnePionStatusBOTMLS(player,state):
-    pass
+
+
 
 # main program
 size = int(input("Masukkan ukuran papan: ")) #ukuran papan
 t = int(input("Masukkan time: ")) #lama waktu
 playerRed = Player(size, 'R', 2) #pembuatan player merah
-playerGreen = Player(size, 'G', 2) #pembuatan player hijau
+playerGreen = Player(size, 'G', 0) #pembuatan player hijau
 state = State(playerRed, playerGreen,size) #pembuatan state
 
 
@@ -95,18 +102,18 @@ while not state.isGameOver():
             moveOnePionStatusPlayer(playerRed,state,t)
         # status 1 sebagai BOT minimax-lS
         elif(playerRed.getStatus()==1):
-            moveOnePionStatusBOTMLS(playerRed,state)
+            moveOnePionStatusBOTMLS(state,playerRed,playerGreen)
         # status 0 sebagai BOT minimax
         elif(playerRed.getStatus()==0):
-            moveOnePionStatusBOTM(playerRed,state)
+            moveOnePionStatusBOTM(state,playerRed,playerGreen)
 
     elif(state.getTurn().getColorPlayer()=='G'): #turn playerGreen
         if(playerGreen.getStatus()==2):
             moveOnePionStatusPlayer(playerGreen,state,t)
         # status 1 sebagai BOT minimax-lS
         elif(playerGreen.getStatus()==1):
-            moveOnePionStatusBOTMLS(playerGreen,state)
+            moveOnePionStatusBOTMLS(state,playerGreen,playerRed)
         # status 0 sebagai BOT minimax
         elif(playerGreen.getStatus()==0):
-            moveOnePionStatusBOTM(playerGreen,state)
+            moveOnePionStatusBOTM(state,playerGreen,playerRed)
     
