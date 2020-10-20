@@ -13,9 +13,16 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 def main():
     size = int(input("Masukkan ukuran papan: "))
     time = int(input("Masukkan timer: "))
+    print("")
+    print("Tipe Player:")
+    print("0. Minimax")
+    print("1. Minimax + Local Search")
+    print("2. Manusia")
+    player1 = int(input("Masukkan player 1: "))
+    player2 = int(input("Masukkan player 2: "))
     clock = pygame.time.Clock()
-    playerRed = Player(size, 'R', 2) #pembuatan player merah
-    playerGreen = Player(size, 'G', 2) #pembuatan player hijau
+    playerRed = Player(size, 'R', player1) #pembuatan player merah
+    playerGreen = Player(size, 'G', player2) #pembuatan player hijau
     state = State(playerRed, playerGreen,size) #pembuatan state
     papan = Board(size,state,time)
     inputUser = inputPage()

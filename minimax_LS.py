@@ -51,7 +51,7 @@ def bestMoveLS(state,botPlayer,humanPlayer,t,alpha,beta):
     state.movePionMinimax(currpion,move,botPlayer)
     
     
-    state.switchTurn()
+    # state.switchTurn()
 
 
 def minimaxLS(state, depth, isMaximizing, botPlayer, humanPlayer,alpha,beta):
