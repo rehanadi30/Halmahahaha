@@ -10,7 +10,7 @@ class State:
         self.p2 =  p2 #pemain
         self.board = papan(size)
         self.turn = p1 #selalu p1 mulai turn duluan
-        # self.nilai = self.objectiveFunction()
+        self.nilai = self.objectiveFunction()
         # self.time = 
 
     def getPlayer1(self):
@@ -189,8 +189,6 @@ class State:
 
 
     def ha(self,n):
-
-        n = 10
         matriks = [[0 for i in range(n)] for j in range(n)]
 
         count = 1
@@ -264,6 +262,11 @@ class State:
             count+=1
             i+=1
             track[1]-=1
+        # for i in range(n):
+        #     for j in range(n):
+        #         print(matriks[i][j], end="")
+        #     print()
+        return matriks
 
     def hb(self,n):
         matriks1 = [[0 for i in range(n)] for j in range(n)]
@@ -338,6 +341,12 @@ class State:
             count+=1
             i+=1
             track[1]+=1
+        
+        # for i in range(n):
+        #     for j in range(n):
+        #         print(matriks1[i][j], end="")
+        #     print()
+        return matriks1
 
     def objectiveFunction(self):
 
@@ -361,7 +370,7 @@ class State:
         h2 = 0
 
         h1_size= self.ha(self.board.getSize())
-        h2_size= self.ha(self.board.getSize())
+        h2_size= self.hb(self.board.getSize())
 
         for i in range(len(pion1)):
             x = pion1[i].getBaris()
@@ -382,8 +391,8 @@ class State:
         # f2 = g2 + h2
         # f = f1 - f2
         f = g1-g2-h1+h2
-        print("f1 = " + str(f1))
-        print("f2 = " + str(f2))
+        # print("f1 = " + str(f1))
+        # print("f2 = " + str(f2))
         print("f = " + str(f))
         return f
     
@@ -394,6 +403,13 @@ class State:
             return False
 
 
+# a = Player(8,"R",1)
+# b = Player(8,"G",2)
+
+# c = State(a,b,8)
+# c.ha(8)
+# c.hb(8)
+# c.objectiveFunction()
 
 
 
