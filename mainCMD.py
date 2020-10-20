@@ -2,7 +2,6 @@ from state import *
 import time
 from MiniMaxBiasa import *
 from minimax_LS import *
-import math
 
 def moveOnePionStatusPlayer(player,state,t):
     timestart=time.time()
@@ -74,13 +73,13 @@ def moveOnePionStatusBOTM(state,player,enemy,t):
     #print kondisi papan setelah dilakukan perpindahan
     for el in state.getBoard().getMatrixofColor():
         print(el)
-    bestMove(state,player,enemy,t,-math.inf,math.inf)
+    bestMove(state,player,enemy,t, -Infinity, Infinity)
     
     
 def moveOnePionStatusBOTMLS(state,player,enemy,t):
     for el in state.getBoard().getMatrixofColor():
         print(el)
-    bestMoveLS(state,player,enemy,t,-math.inf,math.inf)
+    bestMoveLS(state,player,enemy,t)
 
 
 
