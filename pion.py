@@ -1,4 +1,4 @@
-import pygame
+# import pygame
 
 from konstanta import *
 
@@ -74,6 +74,49 @@ class Pion:
                         if self.isJump(i,j,state) or self.isMove(i,j,state):
                             new2 = (i,j)
                             result.append(new2)
+        return result
+
+    def possibleMoveLS(self, state):
+        owner = self.getPionOwner(state)
+        enemy = self.getPionEnemy(state)
+        result=[]
+        # posisi pion saat ini
+        currBaris=self.getBaris()
+        currKolom=self.getKolom()
+        currKoor=(currBaris,currKolom)
+        # iterasi semua block 
+        for i in range(state.getBoard().getSize()):
+            for j in range(state.getBoard().getSize()):
+                # jika i dan j bukan posisi pion
+                if(i!=self.getBaris())or(j!=self.getKolom()):
+                    # jika posisi pion tidak di rumah / goal lawan
+                    # maka pion hanya boleh berpindah jika koor tidak di rumah
+                    if (currKoor not in enemy.getListOfGoal())and((i,j) not in enemy.getListOfGoal()):
+                        # jika perpindahan valid
+                        if self.isJump(i,j,state) or self.isMove(i,j,state):
+                            new1 = (i,j)
+                            if(owner.getColorPlayer()=="R"):
+                                ha=state.ha(state.getBoard().getSize())
+                                if(ha[currBaris][currKolom] > ha[i][j]):
+                                    result.append(new1)
+                            elif (owner.getColorPlayer()=="G"):
+                                hb=state.ha(state.getBoard().getSize())
+                                if(hb[currBaris][currKolom] > hb[i][j]):
+                                    result.append(new1)
+                    # jika posisi pion di rumah, bebas pindah kemanapun
+                    elif(currKoor in enemy.getListOfGoal()):
+                        # jika perpindahan valid
+                        if self.isJump(i,j,state) or self.isMove(i,j,state):
+                            new2 = (i,j)
+                            if(owner.getColorPlayer()=="R"):
+                                ha=state.ha(state.getBoard().getSize())
+                                if(ha[currBaris][currKolom] > ha[i][j]):
+                                    result.append(new2)
+                            elif (owner.getColorPlayer()=="G"):
+                                hb=state.ha(state.getBoard().getSize())
+                                if(hb[currBaris][currKolom] > hb[i][j]):
+                                    result.append(new2)
+                            
         return result
 
 
