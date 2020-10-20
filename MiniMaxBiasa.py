@@ -9,10 +9,13 @@ def max(a, b):
         return b
 
 def min(a, b):
-    return a + b - max(a, b)
+    if(a<b):
+        return a
+    else:
+        return b
 
 def bestMove(state, botPlayer, humanPlayer, t, alpha, beta):
-    bestNilai = -math.inf
+    bestNilai = -Infinity
     timestart=time.time()
     while(time.time()<timestart+t):
         # untuk semua pion yang dimiliki player
@@ -97,7 +100,3 @@ def minimax(state, depth, isMaximizing, botPlayer, humanPlayer, alpha, beta):
                 if (beta <= alpha):
                     break
         return bestNilai
-
-
-
-            
