@@ -8,11 +8,10 @@ for p in playerGreen.getListOfPion():
     print("============")
     print(p.getBaris(),p.getKolom())
     # kemungkinan koordinat move pion
-    kemungkinan = p.possibleMove(state)
+    kemungkinan = p.possibleMoveLS(state)
+    print("---------")
+    print(kemungkinan[0],kemungkinan[1])
+    print("---------")
     
-    # untuk semua kemungkinan dicek nilainya
-    for k in kemungkinan: 
-        print("---------")
-        print(k[0],k[1])
-        print("---------")
+        
         
