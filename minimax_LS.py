@@ -17,7 +17,7 @@ def bestMoveLS(state,botPlayer,humanPlayer,t):
             # cek nilai minimax
             newNilai = minimaxLS(state,0,False,botPlayer,humanPlayer)
             # kembalikan state ke state sebelumnya
-            state.movePionMinimax(p,prevKoor,botPlayer)
+            state.movePionMinimax(p,kemungkinan,botPlayer)
 
             # jika newNilai>bestNilai
             if (newNilai>bestNilai):
@@ -52,7 +52,7 @@ def minimaxLS(state, depth, isMaximizing, botPlayer, humanPlayer):
                 # pindahkan pion
                 state.movePionMinimax(p,k,botPlayer)
                 # cek nilai minimax
-                newNilai = minimax(state,(depth+1),False,botPlayer,humanPlayer)
+                newNilai = minimaxLS(state,(depth+1),False,botPlayer,humanPlayer)
                 # kembalikan state ke state sebelumnya
                 state.movePionMinimax(p,prevKoor,botPlayer)
                 # jika newNilai>bestNilai
@@ -73,7 +73,7 @@ def minimaxLS(state, depth, isMaximizing, botPlayer, humanPlayer):
                 # pindahkan pion
                 state.movePionMinimax(p,k,humanPlayer)
                 # cek nilai minimax
-                newNilai = minimax(state,(depth+1),True,botPlayer,humanPlayer)
+                newNilai = minimaxLS(state,(depth+1),True,botPlayer,humanPlayer)
                 # kembalikan state ke state sebelumnya
                 state.movePionMinimax(p,prevKoor,humanPlayer)
                 # jika newNilai>bestNilai
