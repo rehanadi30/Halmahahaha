@@ -13,15 +13,20 @@ class Board:
     global clickedButtons
     global clickedButtons2
     global listofpion
+    global ticktime
+    ticktime = []
+    
     clickedButtons=set()
     clickedButtons2=set()
     listofpion = []
+    isClicked = False
 
-    def __init__(self, size,state):
+    def __init__(self, size,state,time):
         self.board = []
         self.BSize = size
         self.bidakTerpilih = None
         self.state = state
+        self.time=time
 
     # 
 
@@ -29,15 +34,23 @@ class Board:
         SQUARE_SIZE = WIDTH // self.BSize
         clock = pygame.time.Clock()
         run = True
-        
+        counter, text = self.time+1, '10'.rjust(3)
+        pygame.time.set_timer(pygame.USEREVENT, 1000)
+        pygame.font.init()
+        font = pygame.font.Font("freesansbold.ttf",20)
         while run:
+            clock = pygame.time.Clock()
+            
 
+            # print("checkgameover")
             if(self.state.isGameOver()):
-                print("GAMEEEOVERR")
+                # print("GAMEEEOVERR")
                 run = False
+            # else:
+                # print("skip")
             
             win.fill(YELLOW2)
-            pygame.font.init()
+            
             # print(pygame.display.get_surface().get_size())
             # screen = pygame.display.set_mode((640,480), FULLSCREEN)
             for baris in range(self.BSize):
@@ -48,6 +61,12 @@ class Board:
                 pygame.draw.rect(win, RED1, (0 ,720, 720,820))
             else:
                 pygame.draw.rect(win, BLUE1, (0 ,720, 720,820))
+
+            for i in range(len(ticktime)):
+                smallText = pygame.font.Font("freesansbold.ttf",20)
+                textSurf, textRect = self.text_objects(str(ticktime), smallText)
+                textRect.center = ( (100+(150/2)), (745+(50/2)) )
+                win.blit(textSurf, textRect)
             
             # print(mouse)
            
@@ -171,14 +190,47 @@ class Board:
                 pygame.draw.line(win, BLUE1, (540, 450), (630, 450), 8)
                 pygame.draw.line(win, BLUE1, (630, 450), (630, 360), 8)
                 pygame.draw.line(win, BLUE1, (630, 360), (720, 360), 8)
+                # pygame.draw.line(win, BLUE, (630, 360), (720, 360), 8)
 
-            for event in pygame.event.get():
-                if(event.type == pygame.QUIT):
-                    run = False
-                    pygame.quit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    pos = pygame.mouse.get_pos()
-                    bar, kol = getKoordinat(pos, self.BSize)
+
+                for event in pygame.event.get():
+                    
+                    if(event.type == pygame.QUIT):
+                        run = False
+                        pygame.quit()
+                    
+                    if event.type == pygame.USEREVENT: 
+                        counter -= 1
+                        if(counter==-1):
+                            self.state.switchTurn()
+                            counter=self.time+1
+                        else:
+                            ticktime.clear()
+                            ticktime.append(counter)
+                        # if counter > 0 :
+                        #     text = str(counter).rjust(3) 
+                        # else:
+                        #     pass
+                        print(counter)
+                    
+                    if event.type == pygame.QUIT: 
+                        print("gamasuk white")
+                        break
+
+                    else:
+                        print("masuk white")
+                        win.fill(WHITE)
+                        win.blit(font.render("hey", True, (255, 255, 255)), (300, 300))
+                        # win.update()
+                        pygame.display.update()
+                        clock.tick(60)
+                        # continue
+                    # break
+
+            
+            #     if event.type == pygame.MOUSEBUTTONDOWN:
+            #         pos = pygame.mouse.get_pos()
+            #         bar, kol = getKoordinat(pos, self.BSize)
 
             
             press = pygame.mouse.get_pressed()
@@ -187,11 +239,11 @@ class Board:
                 # print(pos)
                 bar, kol = getKoordinat(pos, self.BSize)
                 t =(bar,kol)
-                print(t)
+                print("CLICKED",t)
                 # clickedButtons2.add(t)
                 if t not in listofpion:
                     listofpion.append(t)
-                print(listofpion)
+                print("LIST OF PION", listofpion)
                 print("")
 
                 # print(bar, kol)
@@ -218,17 +270,17 @@ class Board:
             pygame.draw.circle(win, color, (x1,y1), 40)
         if x1-45 < mouse[0] < x1+45 and  y1-45 < mouse[1] < y1+45:
             pygame.draw.circle(win, WHITE, (x1,y1), 40)
-            if(clicked):
-                print(clicked)
+            # if(clicked):
+                # print(clicked)
                 
             if click[0] == 1:
-                print(x,end=" ")
-                print(y)
+                # print(x,end=" ")
+                # print(y)
                 if(a in clickedButtons):  
                     clickedButtons.remove(a)
                 else:
                     clickedButtons.add(a)
-                print(clickedButtons)
+                print("Clicked Buttons:",clickedButtons)
 
     def pieces10(self,win,color,x,y,action=None): 
         mouse = pygame.mouse.get_pos()
@@ -245,12 +297,12 @@ class Board:
             pygame.draw.circle(win, color, (x1,y1), 30)
         if x1-36 < mouse[0] < x1+36 and  y1-36 < mouse[1] < y1+36:
             pygame.draw.circle(win, WHITE, (x1,y1), 30)
-            if(clicked):
-                print(clicked)
+            # if(clicked):
+                # print(clicked)
                 
             if click[0] == 1:
-                print(x,end=" ")
-                print(y)
+                # print(x,end=" ")
+                # print(y)
                 if(a in clickedButtons):  
                     clickedButtons.remove(a)
                 else:
@@ -272,12 +324,12 @@ class Board:
             pygame.draw.circle(win, color, (x1,y1), 18)
         if x1-23 < mouse[0] < x1+23 and  y1-23 < mouse[1] < y1+23:
             pygame.draw.circle(win, WHITE, (x1,y1), 18)
-            if(clicked):
-                print(clicked)
+            # if(clicked):
+                # print(clicked)
                 
             if click[0] == 1:
-                print(x,end=" ")
-                print(y)
+                # print(x,end=" ")
+                # print(y)
                 if(a in clickedButtons):  
                     clickedButtons.remove(a)
                 else:
@@ -299,12 +351,12 @@ class Board:
         if x1-36 < mouse[0] < x1+36 and  y1-36 < mouse[1] < y1+36:
             if(y1<=720):  
                 pygame.draw.circle(win, WHITE, (x1,y1), 30)
-                if(clicked):
-                    print(clicked)
+                # if(clicked):
+                    # print(clicked)
                     
                 if click[0] == 1:
-                    print(x,end=" ")
-                    print(y)
+                    # print(x,end=" ")
+                    # print(y)
                     if(a in clickedButtons2):  
                         clickedButtons2.remove(a)
                     else:
@@ -317,8 +369,9 @@ class Board:
     
         if 285 < mouse[0] < 285+150 and 745 < mouse[1] < 745+50:
             pygame.draw.rect(win, YELLOW, (285,745,150,50))
-            if click1[0] == 1:
-                print("yeyy move")
+            if (click1[0] == 1):
+                # print(isClicked)
+                print("MOVE")
                 x0 = listofpion.pop(0)
                 x1 = x0[0]
                 x2 = x0[1]
@@ -326,14 +379,14 @@ class Board:
                 player = self.state.getTurn()
                 
                 x = player.getPion(x1,x2)
-                print("listofpion",listofpion)
+                print("listofpion : ",listofpion)
                 buang = listofpion.pop()
                 y = listofpion[:]
                 listofpion.clear()
                 # clickedButtons2.clear()
                 # clickedButtons.clear()
-                print(x0)
-                print(y)
+                # print(x0)
+                # print(y)
 
                 # a = self.state.getPlayer1().getListOfPion()
                 # b = self.state.getPlayer2().getListOfPion()
@@ -341,10 +394,13 @@ class Board:
                 #     print(a[i].getBaris(), a[i].getKolom())
                 # print("")
                 # for i in range(len(b)):
-                #     print(b[i].getBaris(), b[i].getKolom())
-                self.state.movePioninOneTurn(x,y)
-                self.state.switchTurn()
-                clickedButtons.clear()
+                    # print(b[i].getBaris(), b[i].getKolom())
+                if(self.state.movePioninOneTurn(x,y)):
+                    self.state.switchTurn()
+                    clickedButtons.clear()
+                    print("-------------------------------------------")
+                else:
+                    print("Movement tidak valid")
                 
 
                 # a = self.state.getPlayer1().getListOfPion()
@@ -356,8 +412,13 @@ class Board:
                 # print("")
                 # for i in range(len(b)):
                 #     print(b[i].getBaris(), b[i].getKolom())
+                    
+                
         else:
             pygame.draw.rect(win, YELLOW2, (285,745,150,50))
+
+        # if click1[0] == 0 and isClicked==True:
+        #     isClicked=False
 
         smallText = pygame.font.Font("freesansbold.ttf",20)
         textSurf, textRect = self.text_objects("MOVE!", smallText)

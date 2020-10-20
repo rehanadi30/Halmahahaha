@@ -8,11 +8,19 @@ class Player:
         self.status = status  # 0 for BOT Minimax, 1 for BOT Minimax LS, 2 for player
 
         # list of pion yang dimiliki player jika ukuran papan 8
-        pionRed8 = [
+        # pionRed8 = [
+        #     Pion(0, 0, self.color, self.status), Pion(0, 1, self.color, self.status), Pion(0, 2, self.color, self.status), Pion(0, 3, self.color, self.status), Pion(1, 0, self.color, self.status),
+        #     Pion(1, 1, self.color, self.status), Pion(1, 2, self.color, self.status), Pion(2, 0, self.color, self.status), Pion(2, 1, self.color, self.status), Pion(3, 0, self.color, self.status)
+        # ]
+        # pionGreen8 = [
+        #     Pion(7, 7, self.color, self.status), Pion(7, 6, self.color, self.status), Pion(7, 5, self.color, self.status), Pion(7, 4, self.color, self.status), Pion(6, 7, self.color, self.status),
+        #     Pion(6, 6, self.color, self.status), Pion(6, 5, self.color, self.status), Pion(5, 7, self.color, self.status), Pion(5, 6, self.color, self.status), Pion(4, 7, self.color, self.status)
+        # ]
+        pionGreen8 = [
             Pion(0, 0, self.color, self.status), Pion(0, 1, self.color, self.status), Pion(0, 2, self.color, self.status), Pion(0, 3, self.color, self.status), Pion(1, 0, self.color, self.status),
             Pion(1, 1, self.color, self.status), Pion(1, 2, self.color, self.status), Pion(2, 0, self.color, self.status), Pion(2, 1, self.color, self.status), Pion(3, 0, self.color, self.status)
         ]
-        pionGreen8 = [
+        pionRed8 = [
             Pion(7, 7, self.color, self.status), Pion(7, 6, self.color, self.status), Pion(7, 5, self.color, self.status), Pion(7, 4, self.color, self.status), Pion(6, 7, self.color, self.status),
             Pion(6, 6, self.color, self.status), Pion(6, 5, self.color, self.status), Pion(5, 7, self.color, self.status), Pion(5, 6, self.color, self.status), Pion(4, 7, self.color, self.status)
         ]
@@ -26,6 +34,7 @@ class Player:
             Pion(9, 9, self.color, self.status), Pion(9, 8, self.color, self.status), Pion(9, 7, self.color, self.status), Pion(9, 6, self.color, self.status), Pion(9, 5, self.color, self.status), Pion(8, 9, self.color, self.status), Pion(8, 8, self.color, self.status),
             Pion(8, 7, self.color, self.status), Pion(8, 6, self.color, self.status), Pion(7, 9, self.color, self.status), Pion(7, 8, self.color, self.status), Pion(7, 7, self.color, self.status), Pion(6, 9, self.color, self.status), Pion(6, 8, self.color, self.status), Pion(5, 9, self.color, self.status)
         ]
+        
         
         # list of pion yang dimiliki player jika ukuran papan 16
         pionRed16 = [
