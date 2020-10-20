@@ -51,8 +51,6 @@ def bestMove(state, botPlayer, humanPlayer, t, alpha, beta):
         
 
     state.movePionMinimax(currpion, move, botPlayer)
-    
-    
     state.switchTurn()
 
 

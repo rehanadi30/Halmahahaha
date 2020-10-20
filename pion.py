@@ -63,13 +63,13 @@ class Pion:
                 if(i!=self.getBaris())or(j!=self.getKolom()):
                     # jika posisi pion tidak di rumah / goal lawan
                     # maka pion hanya boleh berpindah jika koor tidak di rumah
-                    if (currKoor not in enemy.getListOfGoal())and((i,j) not in enemy.getListOfGoal()):
+                    if ((currKoor not in enemy.getListOfGoalStore()) and (currKoor not in owner.getListOfGoalStore()))and((i,j) not in enemy.getListOfGoalStore()):
                         # jika perpindahan valid
                         if self.isJump(i,j,state) or self.isMove(i,j,state):
                             new1 = (i,j)
                             result.append(new1)
                     # jika posisi pion di rumah, bebas pindah kemanapun
-                    elif(currKoor in enemy.getListOfGoal()):
+                    elif(currKoor in enemy.getListOfGoalStore()):
                         # jika perpindahan valid
                         if self.isJump(i,j,state) or self.isMove(i,j,state):
                             new2 = (i,j)
@@ -79,49 +79,50 @@ class Pion:
     def possibleMoveLS(self, state):
         owner = self.getPionOwner(state)
         enemy = self.getPionEnemy(state)
-        # result=[]
+        
         # posisi pion saat ini
         currBaris=self.getBaris()
         currKolom=self.getKolom()
         currKoor=(currBaris,currKolom)
+        result=(currBaris,currKolom)
         # iterasi semua block 
         for i in range(state.getBoard().getSize()):
             for j in range(state.getBoard().getSize()):
                 # jika i dan j bukan posisi pion
                 if(i!=self.getBaris())or(j!=self.getKolom()):
-                    # jika posisi pion tidak di rumah / goal lawan
+                    # jika posisi pion tidak di rumah / goal lawan dan tidak di goal
                     # maka pion hanya boleh berpindah jika koor tidak di rumah
-                    if (currKoor not in enemy.getListOfGoal())and((i,j) not in enemy.getListOfGoal()):
+                    if ((currKoor not in enemy.getListOfGoalStore()) and (currKoor not in owner.getListOfGoalStore()))and((i,j) not in enemy.getListOfGoalStore()):
                         # jika perpindahan valid
                         if self.isJump(i,j,state) or self.isMove(i,j,state):
                             new1 = (i,j)
                             if(owner.getColorPlayer()=="R"):
                                 ha=state.ha(state.getBoard().getSize())
-                                result = ha[currBaris][currKolom]
-                                if(result > ha[i][j]):
+                                val = ha[currBaris][currKolom]
+                                if(val > ha[i][j]):
                                     # result.append(new1)
                                     result = new1
                             elif (owner.getColorPlayer()=="G"):
-                                hb=state.ha(state.getBoard().getSize())
-                                result = hb[currBaris][currKolom]
-                                if(result > hb[i][j]):
+                                hb=state.hb(state.getBoard().getSize())
+                                val = hb[currBaris][currKolom]
+                                if(val > hb[i][j]):
                                     # result.append(new1)
                                     result = new1
                     # jika posisi pion di rumah, bebas pindah kemanapun
-                    elif(currKoor in enemy.getListOfGoal()):
+                    elif(currKoor in enemy.getListOfGoalStore()):
                         # jika perpindahan valid
                         if self.isJump(i,j,state) or self.isMove(i,j,state):
                             new2 = (i,j)
                             if(owner.getColorPlayer()=="R"):
                                 ha=state.ha(state.getBoard().getSize())
-                                result = ha[currBaris][currKolom]
-                                if(result > ha[i][j]):
+                                val = ha[currBaris][currKolom]
+                                if(val > ha[i][j]):
                                     # result.append(new2)
                                     result = new2
                             elif (owner.getColorPlayer()=="G"):
-                                hb=state.ha(state.getBoard().getSize())
-                                result = hb[currBaris][currKolom]
-                                if(result > hb[i][j]):
+                                hb=state.hb(state.getBoard().getSize())
+                                val = hb[currBaris][currKolom]
+                                if(val > hb[i][j]):
                                     # result.append(new2)
                                     result = new2
                             
@@ -140,10 +141,11 @@ class Pion:
         currKolom=self.getKolom()
         currKoor=(currBaris,currKolom)
         # valid jika
-        # 1. posisi pion tidak di rumah dan posisi pion baru tidak di rumah
+        # 1. posisi pion (tidak di rumah dan tidak di goal) dan posisi pion baru tidak di rumah
         # atau
         # 2. posisi pion di rumah
-        if ((currKoor not in enemy.getListOfGoal())and((newBaris,newKolom) not in enemy.getListOfGoal()))or(currKoor in enemy.getListOfGoal()):
+        
+        if (((currKoor not in enemy.getListOfGoalStore()) and (currKoor not in owner.getListOfGoalStore()) )and((newBaris,newKolom) not in enemy.getListOfGoalStore()))or(currKoor in enemy.getListOfGoalStore()):
             # jika posisi baru yang ingin ditempati kosong
             if(state.getBoard().getColor(newBaris,newKolom)=='n'):
                 # melakukan lompatan vertikal
@@ -213,10 +215,11 @@ class Pion:
         currKolom=self.getKolom()
         currKoor=(currBaris,currKolom)
         # valid jika
-        # 1. posisi pion tidak di rumah dan posisi pion baru tidak di rumah
+        # 1. posisi pion (tidak di rumah dan tidak di goal) dan posisi pion baru tidak di rumah
         # atau
         # 2. posisi pion di rumah
-        if ((currKoor not in enemy.getListOfGoal())and((newBaris,newKolom) not in enemy.getListOfGoal()))or(currKoor in enemy.getListOfGoal()):
+        
+        if (((currKoor not in enemy.getListOfGoalStore()) and (currKoor not in owner.getListOfGoalStore()) )and((newBaris,newKolom) not in enemy.getListOfGoalStore()))or(currKoor in enemy.getListOfGoalStore()):
 
             # jika posisi baru yang ingin ditempati kosong
             if(state.getBoard().getColor(newBaris,newKolom)=='n'):
@@ -259,7 +262,7 @@ class Pion:
 
     def isGoal(self, size):
     #Boolean, ngereturn kondisi ketika masuk kondisi goal
-        if(self.status == 1):
+        if(self.color == 'G'):
             if (size == 16):
                 if(self.getBaris() != 0 or self.getKolom() != 0):
                     return (self.getBaris()+self.getKolom() <= 5)
@@ -269,7 +272,7 @@ class Pion:
                 return (self.getBaris()+self.getKolom() <= 4)
             elif(size == 8):
                 return (self.getBaris() + self.getKolom() <= 3)
-        elif(self.status == 2):
+        elif(self.color == 'R'):
             if (self.status == 1):
                 if (size == 16):
                     if (self.getBaris() != 15 or self.getKolom() != 15):
@@ -280,7 +283,7 @@ class Pion:
                     return (self.getBaris() + self.getKolom() >= 14)
                 elif (size == 8):
                     return (self.getBaris() + self.getKolom() > 11)
-
+        
     def masukGoal(self,size):
     #Buat ngubah state goal. Setiap isGoal berubah status, fungsi ini dipanggil
         if(self.isGoal(size)):

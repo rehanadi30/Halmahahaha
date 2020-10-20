@@ -79,7 +79,7 @@ def moveOnePionStatusBOTM(state,player,enemy,t):
 def moveOnePionStatusBOTMLS(state,player,enemy,t):
     for el in state.getBoard().getMatrixofColor():
         print(el)
-    bestMoveLS(state,player,enemy,t)
+    bestMoveLS(state,player,enemy,t,-Infinity, Infinity)
 
 
 

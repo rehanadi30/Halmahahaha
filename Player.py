@@ -49,36 +49,44 @@ class Player:
         goalRed16 = [(15, 15), (15, 14), (15, 13), (15, 12), (15, 11), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11),(13, 15), (13, 14), (13, 13), (13, 12), (12, 15), (12, 14), (12, 13), (11, 15), (11, 14)]
         goalGreen16 = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4),(2, 0), (2, 1), (2, 2), (2, 3), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1)]
 
+        
+
         if(self.size == 8):
             # jika ukuran papan 8x8
             if(self.color == 'R'):
                 # jika warna player Red
                 self.listOfPion = pionRed8  # list pion yang dimiliki pemain
                 self.listOfGoal = goalRed8  # set posisi goal yang harus dituju pemain
+                self.listOfGoalStore=goalRed8[:]
             elif(self.color == 'G'):
                 # jika warna player Green
                 self.listOfPion = pionGreen8
                 self.listOfGoal = goalGreen8
+                self.listOfGoalStore = goalGreen8[:]
         elif(self.size == 10):
             # jika ukuran papan 10x10
             if(self.color == 'R'):
                 # jika warna player Red
                 self.listOfPion = pionRed10
                 self.listOfGoal = goalRed10
+                self.listOfGoalStore = goalRed10[:]
             elif(self.color == 'G'):
                 # jika warna player Green
                 self.listOfPion = pionGreen10
                 self.listOfGoal = goalGreen10
+                self.listOfGoalStore = goalGreen10[:]
         elif(self.size == 16):
             # jika ukuran papan 16x16
             if(self.color == 'R'):
                 # jika warna player Red
                 self.listOfPion = pionRed16
                 self.listOfGoal = goalRed16
+                self.listOfGoalStore = goalRed16[:]
             elif(self.color == 'G'):
                 # jika warna player Green
                 self.listOfPion = pionGreen16
                 self.listOfGoal = goalGreen16
+                self.listOfGoal = goalGreen16[:]
 
     # getter
     def getListOfPion(self):
@@ -86,6 +94,9 @@ class Player:
 
     def getListOfGoal(self):
         return self.listOfGoal
+
+    def getListOfGoalStore(self):
+        return self.listOfGoalStore
     
     def getColorPlayer(self):
         return self.color
