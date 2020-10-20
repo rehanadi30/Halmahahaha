@@ -5,7 +5,7 @@ class Player:
     def __init__(self, sizePapan, color, status):
         self.size = sizePapan  # ukuran papan
         self.color = color  # warna pemain 'R' untuk red dan 'G' untuk green
-        self.status = status  # 1 for BOT, 2 for player
+        self.status = status  # 0 for BOT Minimax, 1 for BOT Minimax LS, 2 for player
 
         # list of pion yang dimiliki player jika ukuran papan 8
         pionRed8 = [

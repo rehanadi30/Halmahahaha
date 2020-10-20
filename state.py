@@ -125,7 +125,7 @@ class State:
             # move awal
             if(prev==''):
                 # valid jika pion move atau jump
-                if(pion.isJump(newBaris,newKolom,self.getBoard())):
+                if(pion.isJump(newBaris,newKolom,self)):
                     prevRow = pion.getBaris()
                     prevCol = pion.getKolom()
                     newRow = newBaris
@@ -134,7 +134,7 @@ class State:
                     currPlayer.movePion(pion.getBaris(), pion.getKolom(), newBaris, newKolom)
                     # simpan pergerakan saat ini
                     prev='jump'
-                elif(pion.isMove(newBaris,newKolom,self.getBoard())):
+                elif(pion.isMove(newBaris,newKolom,self)):
                     prevRow = pion.getBaris()
                     prevCol = pion.getKolom()
                     newRow = newBaris
@@ -158,7 +158,7 @@ class State:
                 # jika move sebelum adalah jump
                 if(prev=='jump'):
                     # valid jika pion jump
-                    if(pion.isJump(newBaris,newKolom,self.getBoard())):
+                    if(pion.isJump(newBaris,newKolom,self)):
                         newRow = newBaris
                         newCol = newKolom
                         # pindahin pion ke posisi baru

@@ -25,6 +25,18 @@ class Pion:
 
     def getStatus(self):
         return self.status
+    
+    def getPionOwner(self,state):
+        if self in state.getPlayer1().getListOfPion():
+            return state.getPlayer1()
+        else:
+            return state.getPlayer2()
+    
+    def getPionEnemy(self, state):
+        if self in state.getPlayer1().getListOfPion():
+            return state.getPlayer2()
+        else:
+            return state.getPlayer1()
 
     # Setter
     def setBaris(self, newBaris):
@@ -33,108 +45,165 @@ class Pion:
     def setKolom(self, newKolom):
         self.kolom = newKolom
 
-    def isJump(self, newBaris, newKolom, papan):
+    def possibleMove(self, state):
+        # mengecek pemilik pion
+        owner = self.getPionOwner(state)
+        enemy = self.getPionEnemy(state)
+        # mengembalikan list of tuple dari kemungkinan koordinat move yang mungkin
+        result=[]
+        # posisi pion saat ini
+        currBaris=self.getBaris()
+        currKolom=self.getKolom()
+        currKoor=(currBaris,currKolom)
+        # iterasi semua block 
+        for i in range(state.getBoard().getSize()):
+            for j in range(state.getBoard().getSize()):
+                # jika i dan j bukan posisi pion
+                if(i!=self.getBaris())or(j!=self.getKolom()):
+                    # jika posisi pion tidak di rumah / goal lawan
+                    # maka pion hanya boleh berpindah jika koor tidak di rumah
+                    if (currKoor not in enemy.getListOfGoal())and((i,j) not in enemy.getListOfGoal()):
+                        # jika perpindahan valid
+                        if self.isJump(i,j,state) or self.isMove(i,j,state):
+                            new1 = (i,j)
+                            result.append(new1)
+                    # jika posisi pion di rumah, bebas pindah kemanapun
+                    elif(currKoor in enemy.getListOfGoal()):
+                        # jika perpindahan valid
+                        if self.isJump(i,j,state) or self.isMove(i,j,state):
+                            new2 = (i,j)
+                            result.append(new2)
+        return result
+
+
+    def isJump(self, newBaris, newKolom, state):
         # I.S. blok pasti valid atau ada dalam board
         # mengembalikan True jika bergerak melompati satu bidak
         # else false
+        # mengecek pemilik pion
+        owner = self.getPionOwner(state)
+        enemy = self.getPionEnemy(state)
+        # posisi pion saat ini
+        currBaris=self.getBaris()
+        currKolom=self.getKolom()
+        currKoor=(currBaris,currKolom)
+        # valid jika
+        # 1. posisi pion tidak di rumah dan posisi pion baru tidak di rumah
+        # atau
+        # 2. posisi pion di rumah
+        if ((currKoor not in enemy.getListOfGoal())and((newBaris,newKolom) not in enemy.getListOfGoal()))or(currKoor in enemy.getListOfGoal()):
+            # jika posisi baru yang ingin ditempati kosong
+            if(state.getBoard().getColor(newBaris,newKolom)=='n'):
+                # melakukan lompatan vertikal
+                if(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()):
+                    # lompatan ke atas
+                    # True jika satu kotak di depannya terdapat bidak
+                    if state.getBoard().getColor(self.getBaris()-1,self.getKolom()) != 'n':
+                        return True
+                elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()):
+                    # lompatan ke bawah
+                    # True jika satu kotak di depannya terdapat bidak
+                    if state.getBoard().getColor(self.getBaris()+1,self.getKolom()) != 'n':
+                        return True
 
-        # jika posisi baru yang ingin ditempati kosong
-        if(papan.getColor(newBaris,newKolom)=='n'):
-            # melakukan lompatan vertikal
-            if(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()):
-                # lompatan ke atas
-                # True jika satu kotak di depannya terdapat bidak
-                if papan.getColor(self.getBaris()-1,self.getKolom()) != 'n':
-                    return True
-            elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()):
-                # lompatan ke bawah
-                # True jika satu kotak di depannya terdapat bidak
-                if papan.getColor(self.getBaris()+1,self.getKolom()) != 'n':
-                    return True
+                # melakukan lompatan horizontal
+                elif(newBaris==self.getBaris())and(newKolom==self.getKolom()-2):
+                    # lompatan ke kiri
+                    # True jika satu kotak di depannya terdapat bidak
+                    if state.getBoard().getColor(self.getBaris(),self.getKolom()-1) != 'n':
+                        return True
+                elif(newBaris==self.getBaris())and(newKolom==self.getKolom()+2):
+                    # lompatan ke kanan
+                    # True jika satu kotak di depannya terdapat bidak
+                    if state.getBoard().getColor(self.getBaris(),self.getKolom()+1) != 'n':
+                        return True
 
-            # melakukan lompatan horizontal
-            elif(newBaris==self.getBaris())and(newKolom==self.getKolom()-2):
-                # lompatan ke kiri
-                # True jika satu kotak di depannya terdapat bidak
-                if papan.getColor(self.getBaris(),self.getKolom()-1) != 'n':
-                    return True
-            elif(newBaris==self.getBaris())and(newKolom==self.getKolom()+2):
-                # lompatan ke kanan
-                # True jika satu kotak di depannya terdapat bidak
-                if papan.getColor(self.getBaris(),self.getKolom()+1) != 'n':
-                    return True
-
-            # melakukan lompatan diagonal
-            elif(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()+2):
-                # lompatan ke kanan atas
-                # True jika satu kotak di depannya terdapat bidak
-                if papan.getColor(self.getBaris()-1,self.getKolom()+1) != 'n':
-                    return True
-            elif(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()-2):
-                # lompatan ke kiri atas
-                # True jika satu kotak di depannya terdapat bidak
-                if papan.getColor(self.getBaris()-1,self.getKolom()-1) != 'n':
-                    return True
-            elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()+2):
-                # lompatan ke kanan bawah
-                # True jika satu kotak di depannya terdapat bidak
-                if papan.getColor(self.getBaris()+1,self.getKolom()+1) != 'n':
-                    return True
-            elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()-2):
-                # lompatan ke kiri bawah
-                # True jika satu kotak di depannya terdapat bidak
-                if papan.getColor(self.getBaris()+1,self.getKolom()-1) != 'n':
-                    return True
-            
-            # selain itu bukan jump
+                # melakukan lompatan diagonal
+                elif(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()+2):
+                    # lompatan ke kanan atas
+                    # True jika satu kotak di depannya terdapat bidak
+                    if state.getBoard().getColor(self.getBaris()-1,self.getKolom()+1) != 'n':
+                        return True
+                elif(newBaris==self.getBaris()-2)and(newKolom==self.getKolom()-2):
+                    # lompatan ke kiri atas
+                    # True jika satu kotak di depannya terdapat bidak
+                    if state.getBoard().getColor(self.getBaris()-1,self.getKolom()-1) != 'n':
+                        return True
+                elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()+2):
+                    # lompatan ke kanan bawah
+                    # True jika satu kotak di depannya terdapat bidak
+                    if state.getBoard().getColor(self.getBaris()+1,self.getKolom()+1) != 'n':
+                        return True
+                elif(newBaris==self.getBaris()+2)and(newKolom==self.getKolom()-2):
+                    # lompatan ke kiri bawah
+                    # True jika satu kotak di depannya terdapat bidak
+                    if state.getBoard().getColor(self.getBaris()+1,self.getKolom()-1) != 'n':
+                        return True
+                
+                # selain itu bukan jump
+                else:
+                    return False
             else:
                 return False
         else:
             return False
 
-    def isMove(self, newBaris, newKolom, papan):
+    def isMove(self, newBaris, newKolom, state):
         # I.S. blok pasti valid atau ada dalam board
         # mengembalikan True jika bergerak/berpindah satu kotak
         # else false
 
-        # jika posisi baru yang ingin ditempati kosong
-        if(papan.getColor(newBaris,newKolom)=='n'):
-            # melakukan move vertikal
-            if(newBaris==self.getBaris()-1)and(newKolom==self.getKolom()):
-                # move ke atas
-                return True
-            elif(newBaris==self.getBaris()+1)and(newKolom==self.getKolom()):
-                # move ke bawah
-                return True
+        # mengecek pemilik pion
+        owner = self.getPionOwner(state)
+        enemy = self.getPionEnemy(state)
+        # posisi pion saat ini
+        currBaris=self.getBaris()
+        currKolom=self.getKolom()
+        currKoor=(currBaris,currKolom)
+        # valid jika
+        # 1. posisi pion tidak di rumah dan posisi pion baru tidak di rumah
+        # atau
+        # 2. posisi pion di rumah
+        if ((currKoor not in enemy.getListOfGoal())and((newBaris,newKolom) not in enemy.getListOfGoal()))or(currKoor in enemy.getListOfGoal()):
 
-            # melakukan move horizontal
-            elif(newBaris==self.getBaris())and(newKolom==self.getKolom()-1):
-                # move ke kiri
-                return True
-            elif(newBaris==self.getBaris())and(newKolom==self.getKolom()+1):
-                # move ke kanan
-                return True
+            # jika posisi baru yang ingin ditempati kosong
+            if(state.getBoard().getColor(newBaris,newKolom)=='n'):
+                # melakukan move vertikal
+                if(newBaris==self.getBaris()-1)and(newKolom==self.getKolom()):
+                    # move ke atas
+                    return True
+                elif(newBaris==self.getBaris()+1)and(newKolom==self.getKolom()):
+                    # move ke bawah
+                    return True
 
-            # melakukan lompatan diagonal
-            elif(newBaris==self.getBaris()-1)and(newKolom==self.getKolom()+1):
-                # move ke kanan atas
-                return True
-            elif(newBaris==self.getBaris()-1)and(newKolom==self.getKolom()-1):
-                # move ke kiri atas
-                return True
-            elif(newBaris==self.getBaris()+1)and(newKolom==self.getKolom()+1):
-                # move ke kanan bawah
-                return True
-            elif(newBaris==self.getBaris()+1)and(newKolom==self.getKolom()-1):
-                # move ke kiri bawah
-                return True
-            
-            # selain itu bukan jump
+                # melakukan move horizontal
+                elif(newBaris==self.getBaris())and(newKolom==self.getKolom()-1):
+                    # move ke kiri
+                    return True
+                elif(newBaris==self.getBaris())and(newKolom==self.getKolom()+1):
+                    # move ke kanan
+                    return True
+
+                # melakukan lompatan diagonal
+                elif(newBaris==self.getBaris()-1)and(newKolom==self.getKolom()+1):
+                    # move ke kanan atas
+                    return True
+                elif(newBaris==self.getBaris()-1)and(newKolom==self.getKolom()-1):
+                    # move ke kiri atas
+                    return True
+                elif(newBaris==self.getBaris()+1)and(newKolom==self.getKolom()+1):
+                    # move ke kanan bawah
+                    return True
+                elif(newBaris==self.getBaris()+1)and(newKolom==self.getKolom()-1):
+                    # move ke kiri bawah
+                    return True
+                
+                # selain itu bukan jump
+                else:
+                    return False
             else:
                 return False
-        else:
-            return False
-
+        return False
 
     def isGoal(self, size):
     #Boolean, ngereturn kondisi ketika masuk kondisi goal
