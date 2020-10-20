@@ -6,7 +6,6 @@ Halmahahaha adalah suatu permainan Halma 2 pemain yang memiliki bot dengan algor
 
   - [Getting Started](#getting-started)
   - [Running the program](#running-the-program)
-  - [Screenshots](#screenshots)
   - [Authors](#authors)
   - [Acknowledgments](#acknowledgments)
 
@@ -30,8 +29,6 @@ Pygame
 
   - [Python](https://www.python.org/doc/) - Kode yang digunakan
   - [Pygame](https://www.pygame.org/docs/) - Library untuk membuat game
-
-## Screenshots
 
 
 ## Authors
