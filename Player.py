@@ -102,10 +102,10 @@ class Player:
         return None
 
     # setter
-    # def removeGoal(self, position):
-    #     # position dalam bentuk tuple (baris,kolom)
-    #     # I.S. position selalu valid
-    #     self.listOfGoal.remove(position)
+    def removeGoal(self, position):
+        # position dalam bentuk tuple (baris,kolom)
+        # I.S. position selalu valid
+        self.listOfGoal.remove(position)
 
     def movePion(self, currBaris, currKol, newBaris, newKol):
         # Mengganti posisi pion curr menjadi new

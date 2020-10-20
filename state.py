@@ -10,7 +10,7 @@ class State:
         self.p2 =  p2 #pemain
         self.board = papan(size)
         self.turn = p1 #selalu p1 mulai turn duluan
-        self.nilai = self.objectiveFunction()
+        # self.nilai = self.objectiveFunction()
         # self.time = 
 
     def getPlayer1(self):
@@ -46,17 +46,82 @@ class State:
                 return True
         return False
     
-    def movePioninOneTurn(self,pion):
-        currPlayer=self.turn
-        currColorPlayer = self.turn.getColorPlayer()[:]
+    # def movePioninOneTurn(self,pion):
+    #     currPlayer=self.turn
+    #     currColorPlayer = self.turn.getColorPlayer()[:]
+    #     # menyimpan pergerakan pion sebelum
+    #     prev = ''
+    #     prevRow=''
+    #     prevCol=''
+    #     newRow=''
+    #     newCol=''
+    #     while(self.turn.getColorPlayer() == currColorPlayer):
+    #         newBaris,newKolom=map(int,input("Masukkan baris dan kolom baru: ").split())
+    #         # move awal
+    #         if(prev==''):
+    #             # valid jika pion move atau jump
+    #             if(pion.isJump(newBaris,newKolom,self.getBoard())):
+    #                 prevRow = pion.getBaris()
+    #                 prevCol = pion.getKolom()
+    #                 newRow = newBaris
+    #                 newCol = newKolom
+
+    #                 currPlayer.movePion(pion.getBaris(), pion.getKolom(), newBaris, newKolom)
+    #                 # simpan pergerakan saat ini
+    #                 prev='jump'
+    #             elif(pion.isMove(newBaris,newKolom,self.getBoard())):
+    #                 prevRow = pion.getBaris()
+    #                 prevCol = pion.getKolom()
+    #                 newRow = newBaris
+    #                 newCol = newKolom
+
+    #                 # move pisisi pion di player
+    #                 currPlayer.movePion(pion.getBaris(), pion.getKolom(), newBaris, newKolom)
+    #                 # simpan pergerakan saat ini
+    #                 prev='move'
+    #                 # setelah move, switch player
+    #                 self.switchTurn()
+                    
+    #             else:
+    #                 # bisa move lagi with another pion
+    #                 return None
+    #         # move selanjutnya (khusus jump)
+    #         else:
+    #             # valid jika pion jump
+    #             if(pion.isJump(newBaris,newKolom,self.getBoard())):
+    #                 newRow = newBaris
+    #                 newCol = newKolom
+
+    #                 currPlayer.movePion(pion.getBaris(), pion.getKolom(), newBaris, newKolom)
+    #                 # simpan pergerakan saat ini
+    #                 prev='jump'
+    #             else:
+    #                 # bisa move lagi with another pion
+    #                 return None
+
+    #     # jika ada pergerakan maka ubah warna blok
+    #     if(prev!=''):
+    #         for el in currPlayer.getListOfPion():
+    #             print(el.getBaris() , el.getKolom())
+    #         # ganti warna blok 
+    #         # posisi new diganti warna player
+    #         self.board.changeColor(newRow,newCol,currColorPlayer.lower())
+    #         # pisisi sebelum diganti 'n'
+    #         self.board.changeColor(prevRow, prevCol,'n')
+    #         return prev
+    def movePioninOneTurn(self,pion,listOfNewPosition):
+        # List of new position --> list of tuple dari new position dari sebuah pion
+        currPlayer=self.turn #player
+        currColorPlayer = self.turn.getColorPlayer()[:] #warna player
+
         # menyimpan pergerakan pion sebelum
         prev = ''
-        prevRow=''
-        prevCol=''
-        newRow=''
-        newCol=''
-        while(self.turn.getColorPlayer() == currColorPlayer):
-            newBaris,newKolom=map(int,input("Masukkan baris dan kolom baru: ").split())
+
+        # loop sepanjang listOfNewPosition
+        for koor in listOfNewPosition:
+            newBaris = koor[0]
+            newKolom = koor[1]
+
             # move awal
             if(prev==''):
                 # valid jika pion move atau jump
@@ -65,7 +130,7 @@ class State:
                     prevCol = pion.getKolom()
                     newRow = newBaris
                     newCol = newKolom
-
+                    # pindahin pion ke posisi baru
                     currPlayer.movePion(pion.getBaris(), pion.getKolom(), newBaris, newKolom)
                     # simpan pergerakan saat ini
                     prev='jump'
@@ -79,36 +144,47 @@ class State:
                     currPlayer.movePion(pion.getBaris(), pion.getKolom(), newBaris, newKolom)
                     # simpan pergerakan saat ini
                     prev='move'
-                    # setelah move, switch player
-                    self.switchTurn()
                     
                 else:
-                    # bisa move lagi with another pion
-                    return None
-            # move selanjutnya (khusus jump)
+                    # movement tidak valid
+                    return False
+            # move selanjutnya
             else:
-                # valid jika pion jump
-                if(pion.isJump(newBaris,newKolom,self.getBoard())):
-                    newRow = newBaris
-                    newCol = newKolom
+                # jika move sebelum adalah move
+                if(prev=='move'):
+                    # kembalikan pion ke posisi awal
+                    currPlayer.movePion(pion.getBaris(),pion.getKolom(),prevRow,prevCol)
+                    return False #tidak boleh ada pergerakan setelah move
+                # jika move sebelum adalah jump
+                if(prev=='jump'):
+                    # valid jika pion jump
+                    if(pion.isJump(newBaris,newKolom,self.getBoard())):
+                        newRow = newBaris
+                        newCol = newKolom
+                        # pindahin pion ke posisi baru
+                        currPlayer.movePion(pion.getBaris(), pion.getKolom(), newBaris, newKolom)
+                        # simpan pergerakan saat ini
+                        prev='jump'
+                    else:
+                        # kembalikan pion ke posisi awal
+                        currPlayer.movePion(pion.getBaris(),pion.getKolom(),prevRow,prevCol)
+                        # selain jump gerakan tidak valid
+                        return False
 
-                    currPlayer.movePion(pion.getBaris(), pion.getKolom(), newBaris, newKolom)
-                    # simpan pergerakan saat ini
-                    prev='jump'
-                else:
-                    # bisa move lagi with another pion
-                    return None
-
-        # jika ada pergerakan maka ubah warna blok
-        if(prev!=''):
-            for el in currPlayer.getListOfPion():
-                print(el.getBaris() , el.getKolom())
-            # ganti warna blok 
-            # posisi new diganti warna player
-            self.board.changeColor(newRow,newCol,currColorPlayer.lower())
-            # pisisi sebelum diganti 'n'
-            self.board.changeColor(prevRow, prevCol,'n')
-            return prev
+        # jika pergerakan valid ubah warna di board
+        for el in currPlayer.getListOfPion():
+            print(el.getBaris() , el.getKolom())
+        # ganti warna blok 
+        # posisi new diganti warna player
+        self.board.changeColor(newRow,newCol,currColorPlayer.lower())
+        # pisisi sebelum diganti 'n'
+        self.board.changeColor(prevRow, prevCol,'n')
+        # jika newRow dan newCol merupakan goal maka remove goal dari listofgoal
+        
+        newKoor=(newRow,newCol)
+        if newKoor in currPlayer.getListOfGoal():
+            currPlayer.removeGoal(newKoor)
+        return True #movement valid
 
 
 
@@ -312,7 +388,7 @@ class State:
         return f
     
     def isGameOver(self):
-        if(len(self.p1.getListOfGoal)==0 or len(self.p1.getListOfGoal)==0):
+        if(len(self.p1.getListOfGoal())==0 or len(self.p2.getListOfGoal())==0):
             return True
         else:
             return False
